@@ -1,0 +1,362 @@
+#include <iostream>
+#include <itpp/itbase.h>
+#include <cpp/dev_random.cpp>
+#include <cpp/itpp_ext_math.cpp>
+#include <cpp/spinchain.cpp>
+#include <math.h>
+#include <tclap/CmdLine.h>
+#include <device_functions.h>
+#include <cuda.h>
+#include "tools.cpp"
+#include "cuda_utils.cu"
+#include "ev_routines.cu"
+#include "ev_math.cu"
+#include "cuda_functions.cu"
+#include "model.cu"
+#include <time.h>
+
+
+TCLAP::CmdLine cmd("Command description message", ' ', "0.1");
+TCLAP::ValueArg<unsigned int> CseedArg("","Cseed", "Random seed [0 for urandom]",false, 0,"unsigned int",cmd);
+TCLAP::ValueArg<unsigned int> EseedArg("","Eseed", "Random seed [0 for urandom]",false, 0,"unsigned int",cmd);
+TCLAP::ValueArg<unsigned int> PARAMseedArg("","PARAMseed", "Random seed [0 for urandom]",false, 0,"unsigned int",cmd);
+TCLAP::ValueArg<string> optionArg("o","option", "Option" ,false,"nichts", "string",cmd);
+TCLAP::ValueArg<int> nqubitsArg("q","qubits", "Number of qubits",false, 3,"int",cmd);
+TCLAP::ValueArg<int> numtArg("","t", "Number of time iterartions",false, 1,"int",cmd);
+TCLAP::ValueArg<double> JArg("","Jc", "Ising interaction in the z-direction",false, 0.,"double",cmd);
+TCLAP::ValueArg<double> JpArg("","Jp", "Ising interaction between A and B",false, 0.,"double",cmd);
+TCLAP::ValueArg<double> DJs("","DJs", "Delta in the Js interacions on chain",false, 0.,"double",cmd);
+TCLAP::ValueArg<double> Js("","Js", "Center of the Js interactions on chain",false, 0,"double",cmd);
+TCLAP::ValueArg<double> bx("","bx", "Magnetic field in x direction",false, 0,"double",cmd);
+TCLAP::ValueArg<double> by("","by", "Magnetic field in y direction",false, 0,"double",cmd);
+TCLAP::ValueArg<double> bz("","bz", "Magnetic field in z direction",false, 0,"double",cmd);
+TCLAP::ValueArg<double> Dbs("","Dbs", "Delta in the magnetic field on spins",false, 0,"double",cmd);
+TCLAP::ValueArg<int> one_state("","one_state", "State l",false, 0,"int",cmd);
+TCLAP::ValueArg<int> ifrandom("","ifrandom", "0 if you dont want randstate",false,1,"int",cmd);
+TCLAP::ValueArg<int> dev("","dev", "Gpu to be used, 0 for k20, 1 for c20",false, 0,"int",cmd);
+TCLAP::SwitchArg no_general_report("","no_general_report","Print the general report", cmd);
+TCLAP::ValueArg<string> modelArg("","model", "Option" ,false,"nichts", "string",cmd);
+TCLAP::ValueArg<int> tAvg("","t_ave", "Number of time averaged over",false, 1,"int",cmd);
+TCLAP::ValueArg<int> xlenArg("","x", "Some number x",false, 0,"int",cmd);
+TCLAP::ValueArg<int> symr("","symR", "If symmetries sectors of reflections are used",false, 0,"int",cmd);
+
+int main(int argc,char* argv[]) {
+  // Set initial stuff
+  cout.precision(17);
+  cudaSetDevice(dev.getValue());
+  itpp::RNG_randomize();
+  cmd.parse(argc,argv);
+  string option=optionArg.getValue();
+  string model=modelArg.getValue();
+  double J=JArg.getValue();
+  double Jp=JpArg.getValue();
+  int nqubits = nqubitsArg.getValue();
+  int numt=numtArg.getValue();
+  int xlen=xlenArg.getValue();
+  
+  
+  int l=pow(2,nqubits);    
+  int nqubits_env;
+  
+  //Se elige el modelo a usar
+  void (*evolution)(double *, double *, itpp::vec, double, double, itpp::mat, int, int);
+  if(model=="model1") {
+    evolution=model::model1;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="model11") {
+    evolution=model::model11;
+    nqubits_env=nqubits-1;
+  }  
+  if(model=="model2") {
+    evolution=model::model2;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="chain") {
+    evolution=model::chain;
+    nqubits_env=nqubits;
+  }
+  if(model=="chain_open") {
+    evolution=model::chain_open;
+    nqubits_env=nqubits;
+  }
+  
+  int Cseed=CseedArg.getValue();int PARAMseed=PARAMseedArg.getValue();int Eseed=EseedArg.getValue();
+  
+  if (Cseed == 0 ){
+    Random seed_uran1; 
+    Cseed=seed_uran1.strong();
+  }
+  itpp::RNG_reset(Cseed);
+  itpp::cvec cstate = itppextmath::RandomState(2);
+  
+  if (PARAMseed == 0 ){
+    Random seed_uran2; 
+    PARAMseed=seed_uran2.strong();
+  }
+  itpp::RNG_reset(PARAMseed);
+  itpp::vec js = itpp::ones(nqubits_env)*(Js.getValue()-DJs.getValue()) + itpp::randu(nqubits_env)*(2*DJs.getValue());
+  //cout<<js<<endl;
+  
+  itpp::vec b_one(3); b_one(0)=bx.getValue(); b_one(1)=by.getValue(); b_one(2)=bz.getValue();
+  //CAMPO MAGNETICO NO UNIFORME
+  itpp::mat b(nqubits,3);
+  for(int i=0;i<nqubits;i++) { 
+    b(i,0)=b_one(0)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
+    b(i,1)=0;
+    b(i,2)=b_one(2)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
+  }
+  
+  //cout<<bs<<endl;
+  
+  if (Eseed == 0 ){
+    Random seed_uran3; 
+    Eseed=seed_uran3.strong();
+  }
+  itpp::RNG_reset(Eseed);
+  itpp::cvec estate = itppextmath::RandomState(l/2);
+  
+  //Preparacion estado inicial
+  itpp::cvec state=tensor_prod(cstate,estate);
+  //itpp::cvec state = itppextmath::RandomState(l);
+  
+  //Comprobando que sea unitario al principio
+  //cout<<"NORMA "<<itpp::norm(state)<<endl;
+  
+  
+  //Se sube el estado al dev
+  double *dev_R,*dev_I;
+  evcuda::itpp2cuda_malloc(state,&dev_R,&dev_I);
+  
+  if(option=="purity") {
+    for(int it=0;it<numt;it++) {
+      cout<<std::real(evmath::purity_last_qubit(state,l))<<" ";
+      
+      //       itpp::cmat rho = evmath::reduced_densMat(dev_R,dev_I,l/2-1,nqubits);
+      //       rho=rho*rho;
+      //       
+      //       cout<<itpp::trace(rho)<<endl;
+      
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+      
+      evcuda::cuda2itpp(state,dev_R,dev_I);
+      
+      
+    }
+    cout<<endl;
+  }
+  
+  if(option=="purity_timeavg") {
+    itpp::vec purities(20);
+    itpp::cvec zerostate=state;
+    int div=300;
+    for(int ij=0;ij<=div;ij++) {
+      double Ji=((itpp::pi*ij)/div)/2.;
+      evcuda::itpp2cuda(zerostate,dev_R,dev_I);
+      for(int i=0;i<80;i++) {
+	evolution(dev_R,dev_I,js,Ji,Jp,b,nqubits,xlen);
+      }
+      for(int i=0;i<20;i++) {
+	evcuda::cuda2itpp(state,dev_R,dev_I);
+	evolution(dev_R,dev_I,js,Ji,Jp,b,nqubits,xlen);
+	purities(i)=std::real(evmath::purity_last_qubit(state,l));
+      }
+      cout<<Ji<<" "<<itpp::mean(purities)<<" "<<std::sqrt(itpp::variance(purities))<<endl;    
+    }
+    cout<<endl;
+  }
+  
+  if(option=="test_Umat") {
+    itpp::cmat U;
+    if(symr.getValue()==0) {
+      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen);
+    }
+    else { 
+      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,symr.getValue());
+    }
+    int rcont = U.rows();
+    //Prueba unitariedad
+    cout<<itpp::norm(itpp::eye_c(rcont)-U*itpp::hermitian_transpose(U))<<endl;
+    //Prueba de evoluciones
+    itpp::cvec state2 = U * state;
+    evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+    evcuda::cuda2itpp(state,dev_R,dev_I);
+    cout<<itpp::norm(state-state2)<<endl;  
+  }
+  
+  if(option=="get_spectra") {
+    itpp::cmat U;
+    if(symr.getValue()==0) {
+      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen);
+    }
+    else { 
+      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,symr.getValue());
+    }
+    int rcont = U.rows();
+    itpp::cvec eigenvalues(rcont);
+    itpp::cmat eigenvectors(rcont,rcont);
+    itpp::eig(U,eigenvalues,eigenvectors);
+    
+    for(int i=0;i<rcont;i++) {
+      cout<<argument(eigenvalues(i))<<endl;
+    }
+    
+    //Calculo del error
+    //double error=itpp::norm(U-eigenvectors*itpp::diag(eigenvalues)*itpp::hermitian_transpose(eigenvectors));
+    //cout<<"ERROR "<<error<<endl;
+  }  
+  
+  if(option=="correlation") {
+    double *dev_sumdxR,*dev_sumdxI;
+    evcuda::cmalloc(&dev_sumdxR,&dev_sumdxI,l);
+    double *dev_inR,*dev_inI;
+    evcuda::cmalloc(&dev_inR,&dev_inI,l);
+    
+    evcuda::itpp2cuda(state,dev_R,dev_I);
+    
+    int numthreads;
+    int numblocks;
+    choosenumblocks(l,numthreads,numblocks); 
+    
+    sumsigma_x<<<numblocks,numthreads>>>(dev_R,dev_I,dev_inR,dev_inI,nqubits,l);
+    itpp::cvec sumstate(l);
+    
+    evcuda::cuda2itpp(sumstate,dev_sumdxR,dev_sumdxI);
+    evcuda::cuda2itpp(state,dev_inR,dev_inI);
+    
+    
+    for(int it=0;it<numt;it++) {
+      sumsigma_x<<<numblocks,numthreads>>>(dev_R,dev_I,dev_sumdxR,dev_sumdxI,nqubits,l);
+      evcuda::cuda2itpp(sumstate,dev_sumdxR,dev_sumdxI);
+      evcuda::cuda2itpp(state,dev_inR,dev_inI);
+      
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+      evolution(dev_inR,dev_inI,js,J,Jp,b,nqubits,xlen);
+      
+      cout<<sqrt(std::norm(itpp::dot(itpp::conj(sumstate),state)))/nqubits<<endl;
+    }
+    
+    cudaFree(dev_sumdxR);
+    cudaFree(dev_sumdxI);
+    
+  }
+  
+  if(option=="corr_map") {
+    double *dev_sumdxR,*dev_sumdxI;
+    evcuda::cmalloc(&dev_sumdxR,&dev_sumdxI,l);
+    double *dev_inR,*dev_inI;
+    evcuda::cmalloc(&dev_inR,&dev_inI,l);
+    
+    itpp::vec correlations(20);
+    itpp::cvec zerostate=state;
+    itpp::cvec sumstate=state;
+    evcuda::itpp2cuda(state,dev_R,dev_I);
+    
+    int numthreads;
+    int numblocks;
+    choosenumblocks(l,numthreads,numblocks); 
+    
+    int div=250;
+    double bxi,bzi;
+    for(int idiv=0;idiv<div;idiv++) {
+      bxi=((2*itpp::pi*idiv)/div);
+      for(int jdiv=0;jdiv<div;jdiv++) {
+	evcuda::itpp2cuda(zerostate,dev_R,dev_I);
+	sumsigma_x<<<numblocks,numthreads>>>(dev_R,dev_I,dev_inR,dev_inI,nqubits,l);
+	
+	bzi=((2*itpp::pi*jdiv)/div);
+	b(0)=bxi; b(2)=bzi;
+	
+	for(int i=0;i<80;i++) {
+	  evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+	  evolution(dev_inR,dev_inI,js,J,Jp,b,nqubits,xlen);
+	}
+	
+	for(int i=0;i<20;i++) {
+	  sumsigma_x<<<numblocks,numthreads>>>(dev_R,dev_I,dev_sumdxR,dev_sumdxI,nqubits,l);
+	  
+	  evcuda::cuda2itpp(sumstate,dev_sumdxR,dev_sumdxI);
+	  evcuda::cuda2itpp(state,dev_inR,dev_inI);
+	  
+	  evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+	  evolution(dev_inR,dev_inI,js,J,Jp,b,nqubits,xlen);
+	  
+	  correlations(i)=sqrt(std::norm(itpp::dot(itpp::conj(sumstate),state)))/nqubits;
+	}
+	cout<<bxi<<" "<<bzi<<" "<<itpp::mean(correlations)<<" "<<std::sqrt(itpp::variance(correlations))<<endl;    
+      }
+    }
+    
+    cudaFree(dev_sumdxR);
+    cudaFree(dev_sumdxI);
+  }
+  
+  if(option=="trU") {
+    
+    itpp::cvec stateBra=state; 
+    for(int t=0;t<numt;t++) {
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+      evcuda::cuda2itpp(state,dev_R,dev_I);
+      cout<<t+1<<" "<<norm(itpp::dot(itpp::conj(stateBra),state))<<endl;  
+    }
+  }
+  
+  
+  
+  if(option=="carlostest_chain") {
+    itpp::cvec cstate = state;
+    //CUDA evolution
+    evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+    evcuda::cuda2itpp(state,dev_R,dev_I);
+    //Carlos evolution
+    for(int i=0;i<nqubits;i++) {
+      spinchain::apply_ising_z(cstate,js(i),i,(i+1)%nqubits);
+    }
+    for(int i=0;i<nqubits;i++) {
+      spinchain::apply_magnetic_kick(cstate,b_one,i);
+    }
+    
+    cout<<itpp::norm(state-cstate)<<endl; 
+  }
+  
+  if(option=="carlostest_sumdx") {
+    double *dev_sumdxR,*dev_sumdxI;
+    evcuda::cmalloc(&dev_sumdxR,&dev_sumdxI,l);
+    
+    int numthreads;
+    int numblocks;
+    choosenumblocks(l,numthreads,numblocks);
+    
+    itpp::cvec cstate = state;
+    
+    //CUDA evolution
+    //evcuda::apply_sumdx(nqubits,dev_R,dev_I,dev_sumdxR,dev_sumdxI);
+    sumsigma_x<<<numblocks,numthreads>>>(dev_R,dev_I,dev_sumdxR,dev_sumdxI,nqubits,l);
+    evcuda::cuda2itpp(state,dev_sumdxR,dev_sumdxI);
+    //Carlos evolution
+    itpp::cmat sumsig=itpp::zeros_c(l,l);
+    b_one(0)=1.; b_one(1)=0.; b_one(2)=0.;
+    
+    for(int i=0;i<nqubits;i++) {
+      sumsig+=itppextmath::sigma(b_one,i,nqubits);
+    }
+    cstate=sumsig*cstate;
+    cout<<itpp::norm(state-cstate)<<endl; 
+    cout<<itpp::norm(state)<<endl;
+    cout<<itpp::norm(cstate)<<endl;
+    
+    
+    cudaFree(dev_sumdxR);
+    cudaFree(dev_sumdxI);
+    
+  }
+  
+  cudaFree(dev_R);
+  cudaFree(dev_I);
+  
+  
+}
+
+
+
+

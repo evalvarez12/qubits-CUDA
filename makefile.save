@@ -1,0 +1,8 @@
+ifeq ($(LOGNAME),eduardo)
+  INCLUDES := -I. -I ../libs/cpp/
+  ifeq ($(HOSTNAME),jesus)
+    INCLUDES := -I. -I ../libs/cpp/
+  endif
+endif
+# }}}
+-include ~/makefile
