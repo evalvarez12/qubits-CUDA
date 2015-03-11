@@ -13,7 +13,7 @@ dists=[]
 for num in range(100) :
   tdist=[]
   for j in [1,2] :
-    spectra=loadtxt("spectra/spectra_dos_symr"+str(j)+"_"+str(num)+".dat")
+    spectra=loadtxt("spectra/spectra_uno_symr"+str(j)+"_"+str(num)+".dat")
     spectra=sort(spectra)
     dist=zeros(len(spectra))
     for i in range(len(spectra)-1) :
@@ -80,7 +80,7 @@ anim = animation.FuncAnimation(fig, animate, init_func=init,
            frames=100, interval=1, blit=True)
 
 #GUARDAR
-#mywriter = animation.FFMpegWriter()
-#anim.save('Ps_transition2.mp4', writer=mywriter)
+mywriter = animation.FFMpegWriter()
+anim.save('Ps_transition1_sym.mp4', writer=mywriter)
 
 show()

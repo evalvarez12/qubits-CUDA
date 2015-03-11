@@ -56,7 +56,7 @@ int main(int argc,char* argv[]) {
   
   
   int l=pow(2,nqubits);    
-  int nqubits_env;
+  int nqubits_env,xl;
   
   //Se elige el modelo a usar
   void (*evolution)(double *, double *, itpp::vec, double, double, itpp::mat, int, int);
@@ -79,6 +79,22 @@ int main(int argc,char* argv[]) {
   if(model=="chain_open") {
     evolution=model::chain_open;
     nqubits_env=nqubits;
+  }
+  if(model=="model3") {
+    evolution=model::model3;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="model3_open") {
+    evolution=model::model3_open;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="model4") {
+    evolution=model::model4;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="model4_open") {
+    evolution=model::model4_open;
+    nqubits_env=nqubits-1;
   }
   
   int Cseed=CseedArg.getValue();int PARAMseed=PARAMseedArg.getValue();int Eseed=EseedArg.getValue();
@@ -114,10 +130,24 @@ int main(int argc,char* argv[]) {
     Eseed=seed_uran3.strong();
   }
   itpp::RNG_reset(Eseed);
-  itpp::cvec estate = itppextmath::RandomState(l/2);
   
-  //Preparacion estado inicial
-  itpp::cvec state=tensor_prod(cstate,estate);
+  itpp::cvec state;
+  if(xlen==0) {
+    itpp::cvec estate = itppextmath::RandomState(l/2);
+  
+    //Preparacion estado inicial
+    state=tensor_prod(cstate,estate);
+  }
+  else {
+    xl=pow(2,xlen);
+    itpp::cvec estateA = itppextmath::RandomState(xl);
+    itpp::cvec estateB = itppextmath::RandomState(l/(xl*2));
+  
+    //Preparacion estado inicial
+    state=tensor_prod(cstate,tensor_prod(estateB,estateA)); 
+  }
+    
+    
   //itpp::cvec state = itppextmath::RandomState(l);
   
   //Comprobando que sea unitario al principio
@@ -146,6 +176,34 @@ int main(int argc,char* argv[]) {
     cout<<endl;
   }
   
+  if(option=="purity_all_systems") {
+    int whichA,whichB,whichC;
+    itpp::cmat rhoA,rhoB;
+    for(int it=0;it<numt;it++) {
+      //cout<<std::real(evmath::purity_last_qubit(state,l))<<endl;
+      
+      whichC=l/2;
+      whichA=xl-1;
+      whichB=(l-1)^(whichA^whichC);
+            
+      rhoA = evmath::reduced_densMat(dev_R,dev_I,whichA,nqubits);
+      rhoB = evmath::reduced_densMat(dev_R,dev_I,whichB,nqubits);
+      //rhoC = evmath::reduced_densMat(dev_R,dev_I,whichC,nqubits);
+      
+      rhoA=rhoA*rhoA;
+      rhoB=rhoB*rhoB;
+      //rhoC=rhoC*rhoC;
+
+      cout<<real(trace(rhoA))<<" "<<real(itpp::trace(rhoB))<<" "<<real(evmath::purity_last_qubit(state,l))<<endl;
+      
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+      
+      evcuda::cuda2itpp(state,dev_R,dev_I);
+      
+      
+    }
+  }
+  
   if(option=="purity_timeavg") {
     itpp::vec purities(20);
     itpp::cvec zerostate=state;
@@ -154,11 +212,11 @@ int main(int argc,char* argv[]) {
       double Ji=((itpp::pi*ij)/div)/2.;
       evcuda::itpp2cuda(zerostate,dev_R,dev_I);
       for(int i=0;i<80;i++) {
-	evolution(dev_R,dev_I,js,Ji,Jp,b,nqubits,xlen);
+	evolution(dev_R,dev_I,js,J,Ji,b,nqubits,xlen);
       }
       for(int i=0;i<20;i++) {
 	evcuda::cuda2itpp(state,dev_R,dev_I);
-	evolution(dev_R,dev_I,js,Ji,Jp,b,nqubits,xlen);
+	evolution(dev_R,dev_I,js,J,Ji,b,nqubits,xlen);
 	purities(i)=std::real(evmath::purity_last_qubit(state,l));
       }
       cout<<Ji<<" "<<itpp::mean(purities)<<" "<<std::sqrt(itpp::variance(purities))<<endl;    
