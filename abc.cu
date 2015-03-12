@@ -209,7 +209,7 @@ int main(int argc,char* argv[]) {
     itpp::cvec zerostate=state;
     int div=300;
     for(int ij=0;ij<=div;ij++) {
-      double Ji=((itpp::pi*ij)/div)/2.;
+      double Ji=((itpp::pi*2*ij)/div);
       evcuda::itpp2cuda(zerostate,dev_R,dev_I);
       for(int i=0;i<80;i++) {
 	evolution(dev_R,dev_I,js,J,Ji,b,nqubits,xlen);
