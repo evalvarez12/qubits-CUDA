@@ -96,6 +96,15 @@ int main(int argc,char* argv[]) {
     evolution=model::model4_open;
     nqubits_env=nqubits-1;
   }
+  if(model=="model5") {
+    evolution=model::model5;
+    nqubits_env=nqubits-1;
+  }
+  
+  if(model=="model5_open") {
+    evolution=model::model5_open;
+    nqubits_env=nqubits-1;
+  }
   
   int Cseed=CseedArg.getValue();int PARAMseed=PARAMseedArg.getValue();int Eseed=EseedArg.getValue();
   
@@ -205,16 +214,16 @@ int main(int argc,char* argv[]) {
   }
   
   if(option=="purity_timeavg") {
-    itpp::vec purities(20);
+    itpp::vec purities(100);
     itpp::cvec zerostate=state;
     int div=300;
     for(int ij=0;ij<=div;ij++) {
-      double Ji=((itpp::pi*2*ij)/div);
+      double Ji=((itpp::pi*ij)/div);
       evcuda::itpp2cuda(zerostate,dev_R,dev_I);
-      for(int i=0;i<80;i++) {
+      for(int i=0;i<100;i++) {
 	evolution(dev_R,dev_I,js,J,Ji,b,nqubits,xlen);
       }
-      for(int i=0;i<20;i++) {
+      for(int i=0;i<100;i++) {
 	evcuda::cuda2itpp(state,dev_R,dev_I);
 	evolution(dev_R,dev_I,js,J,Ji,b,nqubits,xlen);
 	purities(i)=std::real(evmath::purity_last_qubit(state,l));
