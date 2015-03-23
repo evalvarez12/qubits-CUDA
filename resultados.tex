@@ -91,8 +91,26 @@ We fix all parameters except $J_p$ and we calculate an average of the purity def
 <\gamma>_{T_1}^{T_2} = \frac{1}{T_2-T_1+1} \sum_{t=T_1}^{T_2} \gamma(t).
 \end{equation}
 
-For $<\gamma>_{80}^{100}$ using the parameters $J_c,J_p,J_s,\Delta J,\Delta b,b_x,b_z=[0.05,0.,1.0,0.1,0,1.0,1.0] $ 
+It's important to note that the average of the purity is extremely sensible to the times over the average is made. 
+As given a long suficient time purity always decays to its lowest value.
+
+IMPORTANT- Seeds are as follows $--Cseed 0 --Eseed 1463 --PARAMseed 8589$.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.48\columnwidth]{long_time1}  
+\includegraphics[width=.48\columnwidth]{long_time2}  
+\end{center}
+\caption{}
+\label{p_m3}
+\end{figure}
+
+
+
+For $<\gamma>_{100}^{200}$ using the parameters $J_c,J_p,J_s,\Delta J,\Delta b,b_x,b_z=[0.05,0.,1.0,0.1,0,1.0,1.0] $ 
 and $J_p \in [0,2\pi]$. ${\rm dim}([A,B,C])=[4,8,1]$.
+
+IMPORTANT- Seeds are as follows $--Cseed 3475 --Eseed 1463 --PARAMseed 8589$.
 
 For ``model3" - ``model3\ud open" we obtain
 
@@ -124,10 +142,50 @@ With the same parameters for ``model4" - ``model4\ud open"
 % In Fig. \ref{p_m4} we see however that is not the case and one can achieve very high values of $<\gamma>$ for a certain small value of 
 % $J_p$.
 
-The big question this first result show is that,  how much topology of the system plays a central role in the conservation of the purity? If so how about the interaction of $A$ and $B$?
-Or if we add a fourth system $D$?.
+% The big question this first result show is that,  how much topology of the system plays a central role in the conservation of the purity? If so how about the interaction of $A$ and $B$?
+% Or if we add a fourth system $D$?.
+% 
+% 
+% 
+% Second question.
+% With the same parameters for ``model6" - ``model6\ud open"
 
-First question.
+${\rm dim}([A,B,C])=[3,9,1]$.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.48\columnwidth]{p_model4_1}  
+\includegraphics[width=.48\columnwidth]{p_model4_1_open}  
+\end{center}
+\caption{}
+\label{p_m4}
+\end{figure}
+
+${\rm dim}([A,B,C])=[6,6,1]$.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.48\columnwidth]{p_model4_2}  
+\includegraphics[width=.48\columnwidth]{p_model4_2_open}  
+\end{center}
+\caption{}
+\label{p_m4}
+\end{figure}
+
+${\rm dim}([A,B,C])=[6,11,1]$.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.48\columnwidth]{p_model4_3}  
+\includegraphics[width=.48\columnwidth]{p_model4_3_open}  
+\end{center}
+\caption{}
+\label{p_m4}
+\end{figure}
+
+The big question this first result show is that,  how much topology of the system plays a central role in the conservation of the purity? If so how about the interaction of $A$ and $B$?
+
+To adress this question.
 With the same parameters for ``model5" - ``model5\ud open"  ${\rm dim}([A,B,C])=[6,6,1]$.
 
 \begin{figure}[H]
@@ -140,8 +198,29 @@ With the same parameters for ``model5" - ``model5\ud open"  ${\rm dim}([A,B,C])=
 \end{figure}
 
 
-Second question.
-With the same parameters for ``model6" - ``model6\ud open"
+${\rm dim}([A,B,C])=[8,8,1]$.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.48\columnwidth]{p_model5_1}  
+\includegraphics[width=.48\columnwidth]{p_model5_1_open}  
+\end{center}
+\caption{}
+\label{p_m4}
+\end{figure}
+
+
+${\rm dim}([A,B,C])=[3,3,1]$.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.48\columnwidth]{p_model5_2}  
+\includegraphics[width=.48\columnwidth]{p_model5_2_open}  
+\end{center}
+\caption{}
+\label{p_m4}
+\end{figure}
+
 
 \end{document}
 
