@@ -40,14 +40,14 @@
 \section{Transitions in the P(s)}
 
 We are interested in finding the transitions of from a GOE to Poisson statistics on the
-nearest neighbor distribution ($P(s)$) when the parameters change from the ergodic regime to the non-ergodic 
+nearest neighbour distribution ($P(s)$) when the parameters change from the ergodic regime to the non-ergodic 
 one.
 
 Spectra was obtained with two different methods, in the first one we break the symmetry by varying the Ising interaction between the
 spins on the closed chain. For the second one we decomposed the open chain into reflection symmetry sectors.
 
 Animations of the $P(s)$ for a chain in the two cases varying different components of the magnetic kick. As
-the color lines in the Fig. \ref{anim_gui} shows.
+the colour lines in the Fig. \ref{anim_gui} shows.
 
 \begin{figure}[H]
 \begin{center}
@@ -65,7 +65,7 @@ The animations are ass follows
 \item ``Ps\ud transition2\underline{\space\space}sym" - Closed chain $J=1$ $b_x=1.4$ $b_z=[0,1]$ reflection symmetries used $\gd$
 \end{itemize}
 
-Comparin the two methods we see that breaking symmetries using small variations in the Ising interaction in the chain gives
+Comparing the two methods we see that breaking symmetries using small variations in the Ising interaction in the chain gives
 a better shaped $P(s)$. Also the transitions shows some correlation with the map \ref{anim_gui} only in some places of the
 regime, this remains a mystery
 
@@ -79,11 +79,11 @@ Where:
 \begin{itemize}
 \item $J_c$ - Interaction of $C$ with $A$.
 \item $J_p$ - Interaction between $A$ and $B$.
-\item $J_s$ - Center of internal interactions of $A$ and $B$.
+\item $J_s$ - Centre of internal interactions of $A$ and $B$.
 \item $\Delta J$ - Such that $J_i \in [J_s - \Delta J, J_s + \Delta J]$.
 \item $\Delta b$ - Such that $b_{{\{x,z\}}_i} \in [b_\{x,z\} - \Delta b, b_\{x,z\} + \Delta b]$.
-\item $b_x$ - Center of magnetic component $x$.
-\item $b_z$ - Center of magnetic component $z$. 
+\item $b_x$ - Centre of magnetic component $x$.
+\item $b_z$ - Centre of magnetic component $z$. 
 \end{itemize}
 
 We fix all parameters except $J_p$ and we calculate an average of the purity defined as:
@@ -92,7 +92,7 @@ We fix all parameters except $J_p$ and we calculate an average of the purity def
 \end{equation}
 
 It's important to note that the average of the purity is extremely sensible to the times over the average is made. 
-As given a long suficient time purity always decays to its lowest value.
+As given a long sufficient time purity always decays to its lowest value.
 
 IMPORTANT- Seeds are as follows $--Cseed 0 --Eseed 1463 --PARAMseed 8589$.
 
@@ -105,12 +105,13 @@ IMPORTANT- Seeds are as follows $--Cseed 0 --Eseed 1463 --PARAMseed 8589$.
 \label{p_m3}
 \end{figure}
 
-
+We see that in order to gain a precise understanding of the velocity of the decay in purity we need to take averages
+over the ensemble of initial states in $C$.
 
 For $<\gamma>_{100}^{200}$ using the parameters $J_c,J_p,J_s,\Delta J,\Delta b,b_x,b_z=[0.05,0.,1.0,0.1,0,1.0,1.0] $ 
 and $J_p \in [0,2\pi]$. ${\rm dim}([A,B,C])=[4,8,1]$.
 
-IMPORTANT- Seeds are as follows $--Cseed 3475 --Eseed 1463 --PARAMseed 8589$.
+% IMPORTANT- Seeds are as follows $--Cseed 3475 --Eseed 1463 --PARAMseed 8589$.
 
 For ``model3" - ``model3\ud open" we obtain
 
@@ -127,6 +128,7 @@ For ``model3" - ``model3\ud open" we obtain
 
 
 With the same parameters for ``model4" - ``model4\ud open"
+${\rm dim}([A,B,C])=[4,8,1]$.
 
 \begin{figure}[H]
 \begin{center}
@@ -136,6 +138,8 @@ With the same parameters for ``model4" - ``model4\ud open"
 \caption{}
 \label{p_m4}
 \end{figure}
+
+Now we vary the size of models $A$ and $B$.
 
 % Something very important is noted between these two figures. In Fig. \ref{p_m3} we see the maximum of $<\gamma>$ around
 % the value $J_p=1.0$ which is almost equivalent as one central system connected to a large system, as $A$ and $B$ merge into one big chain.
@@ -183,10 +187,13 @@ ${\rm dim}([A,B,C])=[6,11,1]$.
 \label{p_m4}
 \end{figure}
 
+In this model we see how only when $A$ purity decays slowly, as one can expect based on the results on ``model1".
+
 The big question this first result show is that,  how much topology of the system plays a central role in the conservation of the purity? If so how about the interaction of $A$ and $B$?
 
-To adress this question.
-With the same parameters for ``model5" - ``model5\ud open"  ${\rm dim}([A,B,C])=[6,6,1]$.
+To address this question.
+With the same parameters for ``model5" - ``model5\ud open" and varying the size of $A$ and $B$.
+${\rm dim}([A,B,C])=[6,6,1]$.
 
 \begin{figure}[H]
 \begin{center}
@@ -221,6 +228,8 @@ ${\rm dim}([A,B,C])=[3,3,1]$.
 \label{p_m4}
 \end{figure}
 
+For this case we see how the models size becomes irrelevant as there is a constant symmetry between $A$ and $B$ dictated by
+their interactions.
 
 \end{document}
 
