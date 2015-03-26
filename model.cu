@@ -192,7 +192,7 @@ void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
              /      
         *   *   *   * 
              \      
-              *  last qubit
+              *  last qubit - not kicked
           
   */
   int numthreads, numblocks;
@@ -212,7 +212,7 @@ void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
   //se hace la interacion 0 con A
   Ui_kernel<<<numblocks,numthreads>>>(nqubits-1,0,dev_R,dev_I,cos(j),sin(j),l);
   //evolucion patada magnetica
-  for(int i=0;i<nqubits;i++) {
+  for(int i=0;i<nqubits-1;i++) {
     set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
     Uk_kernel<<<numblocks,numthreads>>>(i,dev_R,dev_I,bx,by,bz,kcos,ksin,l);     
     }

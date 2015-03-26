@@ -113,7 +113,13 @@ int main(int argc,char* argv[]) {
     Cseed=seed_uran1.strong();
   }
   itpp::RNG_reset(Cseed);
+  //ESTADO INICIAL C
   itpp::cvec cstate = itppextmath::RandomState(2);
+  
+  if (Cseed == -1 ){
+    cstate = itpp::ones_c(2);
+    cstate=cstate*(1/sqrt(2));
+  }
   
   if (PARAMseed == 0 ){
     Random seed_uran2; 
@@ -184,6 +190,14 @@ int main(int argc,char* argv[]) {
     }
     cout<<endl;
   }
+  
+  if(option=="purity_onet") {
+    for(int it=0;it<numt;it++) {
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+    }
+    evcuda::cuda2itpp(state,dev_R,dev_I);
+    cout<<std::real(evmath::purity_last_qubit(state,l))<<endl;
+  }  
   
   if(option=="purity_all_systems") {
     int whichA,whichB,whichC;
