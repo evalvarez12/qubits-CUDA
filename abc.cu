@@ -100,9 +100,12 @@ int main(int argc,char* argv[]) {
     evolution=model::model5;
     nqubits_env=nqubits-1;
   }
-  
   if(model=="model5_open") {
     evolution=model::model5_open;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="model7") {
+    evolution=model::model7;
     nqubits_env=nqubits-1;
   }
   
