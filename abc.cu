@@ -112,6 +112,11 @@ int main(int argc,char* argv[]) {
     evolution=model::model8;
     nqubits_env=nqubits-1;
   }
+  if(model=="modelVar") {
+    evolution=model::modelVar;
+    nqubits_env=nqubits-1;
+  }
+
   
   int Cseed=CseedArg.getValue();int PARAMseed=PARAMseedArg.getValue();int Eseed=EseedArg.getValue();
   
