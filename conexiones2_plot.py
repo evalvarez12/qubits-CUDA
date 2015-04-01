@@ -1,39 +1,27 @@
 from pylab import *
 
-#a=loadtxt("pur_conexiones-2-10.dat")
-#b=loadtxt("pur_conexiones-2-20.dat")
-#c=loadtxt("pur_conexiones-2-20-2.dat")
-#d=loadtxt("pur_conexiones-2-20-3.dat")
-#e=loadtxt("pur_conexiones-2-20-4.dat")
-#f=loadtxt("pur_conexiones-2-20-7.dat")
-#g=loadtxt("pur_conexiones-2-20-5.dat")
-#h=loadtxt("pur_conexiones-2-20-6.dat")
+#lines=['o-','<-','p-','v-','*-','^-','D-','h-','>-','H-','d-','x-','s-','+-']
 
-#plot(a,label="10 - $\gamma=0.1$")
-#plot(b,label="20 - $\gamma=0.1$")
-#plot(c,label="20 - $\gamma=0.5$")
-#plot(d,label="20 - $\gamma=1.0$")
-#plot(e,label="20 - $\gamma=2.0$")
-#plot(f,label="20 - $\gamma=0.05$")
-#plot(g,label="20 - $\gamma=0.01$")
-#plot(h,label="20 - $\lambda=0.001$")
-
-a=loadtxt("pur_conexiones-3-2.dat")
-b=loadtxt("pur_conexiones-3-3.dat")
-c=loadtxt("pur_conexiones-3-4.dat")
-d=loadtxt("pur_conexiones-3-1.dat")
-
-plot(a,label="$17$")
-plot(b,label="$20$")
-plot(c,label="$23$")
-plot(d,label="$26$")
+#gammas=[.6,.3,.2,.15,.12,.1,.08,.075,.067,.06,.055,.05,.046,0.043]
+#gammas=sqrt(gammas)
+#gammas2=[]
+#for i in gammas:
+ # gammas2+=[round(i,3)]
 
 
+#l=0
+#g=0
+for i in range(1,6)  :
+  a=loadtxt("pur_conexiones-2-2-"+str(i)+".dat")
+  plot(a)
 
+a=loadtxt("pur_conexiones-2-2-6.dat")
+plot(a,'D-',markevery=50)  
+  
 
 
 legend()
+axis([0,2500,0.5,1])
 xlabel("$t$")
 ylabel("$P$")
-axis([0,200,.48,1])
 show()
