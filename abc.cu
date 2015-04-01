@@ -13,6 +13,7 @@
 #include "ev_math.cu"
 #include "cuda_functions.cu"
 #include "model.cu"
+#include "ex_model.cu"
 #include <time.h>
 
 
@@ -116,6 +117,63 @@ int main(int argc,char* argv[]) {
     evolution=model::modelVar;
     nqubits_env=nqubits-1;
   }
+  if(model=="modelVar1") {
+    evolution=extra_model::modelVar1;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar2") {
+    evolution=extra_model::modelVar2;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar3") {
+    evolution=extra_model::modelVar3;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar4") {
+    evolution=extra_model::modelVar4;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar5") {
+    evolution=extra_model::modelVar5;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar6") {
+    evolution=extra_model::modelVar6;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar7") {
+    evolution=extra_model::modelVar7;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar8") {
+    evolution=extra_model::modelVar8;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar9") {
+    evolution=extra_model::modelVar9;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar10") {
+    evolution=extra_model::modelVar10;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar11") {
+    evolution=extra_model::modelVar11;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar12") {
+    evolution=extra_model::modelVar12;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar13") {
+    evolution=extra_model::modelVar13;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelVar14") {
+    evolution=extra_model::modelVar14;
+    nqubits_env=nqubits-1;
+  }
+  
 
   
   int Cseed=CseedArg.getValue();int PARAMseed=PARAMseedArg.getValue();int Eseed=EseedArg.getValue();

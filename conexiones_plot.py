@@ -1,19 +1,16 @@
 from pylab import *
 
-a=loadtxt("pur_conexiones-2-1.dat")
-b=loadtxt("pur_conexiones-2-2.dat")
-c=loadtxt("pur_conexiones-2-3.dat")
-d=loadtxt("pur_conexiones-2-4.dat")
-e=loadtxt("pur_conexiones-2-5.dat")
-f=loadtxt("pur_conexiones-2-6.dat")
+lines=['o-','<-','p-','v-','*-','^-','D-','h-','>-','H-','d-','x-','s-','+-']
 
+gammas=[.6,.3,.2,.15,.12,.1,.08,.075,.067,.06,.055,.05,.046,0.043]
 
-plot(a)
-plot(b)
-plot(c)
-plot(d)
-plot(e)
-plot(f,'s-',markevery=50)
+l=0
+g=0
+for i in range(1,15)  :
+  a=loadtxt("pur_conexiones-4-"+str(i)+".dat")
+  plot(a,lines[l],markevery=50,label="$"+str(i)+"$  $ \gamma= "+str(gammas[g])+"$")
+  g+=1
+  l+=1
 
 
 legend()
