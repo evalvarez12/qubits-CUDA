@@ -173,6 +173,14 @@ int main(int argc,char* argv[]) {
     evolution=extra_model::modelVar14;
     nqubits_env=nqubits-1;
   }
+  if(model=="modelConexComplete") {
+    evolution=extra_model::modelConexComplete;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="modelConexRand") {
+    evolution=extra_model::modelConexRand;
+    nqubits_env=nqubits-1;
+  }
   
 
   
@@ -190,25 +198,6 @@ int main(int argc,char* argv[]) {
     cstate = itpp::ones_c(2);
     cstate=cstate*(1/sqrt(2));
   }
-  
-  if (PARAMseed == 0 ){
-    Random seed_uran2; 
-    PARAMseed=seed_uran2.strong();
-  }
-  itpp::RNG_reset(PARAMseed);
-  itpp::vec js = itpp::ones(nqubits_env)*(Js.getValue()-DJs.getValue()) + itpp::randu(nqubits_env)*(2*DJs.getValue());
-  //cout<<js<<endl;
-  
-  itpp::vec b_one(3); b_one(0)=bx.getValue(); b_one(1)=by.getValue(); b_one(2)=bz.getValue();
-  //CAMPO MAGNETICO NO UNIFORME
-  itpp::mat b(nqubits,3);
-  for(int i=0;i<nqubits;i++) { 
-    b(i,0)=b_one(0)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
-    b(i,1)=0;
-    b(i,2)=b_one(2)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
-  }
-  
-  //cout<<bs<<endl;
   
   if (Eseed == 0 ){
     Random seed_uran3; 
@@ -231,7 +220,24 @@ int main(int argc,char* argv[]) {
     //Preparacion estado inicial
     state=tensor_prod(cstate,tensor_prod(estateB,estateA)); 
   }
-    
+  
+  //PARAMETROS SEED
+  if (PARAMseed == 0 ){
+    Random seed_uran2; 
+    PARAMseed=seed_uran2.strong();
+  }
+  itpp::RNG_reset(PARAMseed);
+  itpp::vec js = itpp::ones(nqubits_env)*(Js.getValue()-DJs.getValue()) + itpp::randu(nqubits_env)*(2*DJs.getValue());
+  //cout<<js<<endl;
+  
+  itpp::vec b_one(3); b_one(0)=bx.getValue(); b_one(1)=by.getValue(); b_one(2)=bz.getValue();
+  //CAMPO MAGNETICO NO UNIFORME
+  itpp::mat b(nqubits,3);
+  for(int i=0;i<nqubits;i++) { 
+    b(i,0)=b_one(0)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
+    b(i,1)=0;
+    b(i,2)=b_one(2)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
+  }
     
   //itpp::cvec state = itppextmath::RandomState(l);
   

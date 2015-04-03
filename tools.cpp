@@ -552,7 +552,20 @@ itpp::cvec tensor_prod(itpp::cvec a, itpp::cvec b) {
   }
   return c;
 }
-    
+ 
+bool in(int a, itpp::ivec b) {
+  for(int i=0;i<b.size();i++) {
+    if (b(i)==a) {
+      return true;
+    }
+  }
+  return false;
+}
+
+itpp::imat conexiones(num,dima,dimb) {
+  itpp::imat conex = itpp::zeros_i(dima,dimb);
+  
+
   
 
 
