@@ -46,12 +46,15 @@ int main(int argc,char* argv[]) {
 //   //cout<<sumsig(2)<<endl;
   
   
-    itpp::ivec conex="";
-  for(int i=0;i<dimA,i++) {
-    ivec.append(itpp::ivec " ");
-  }
+// itpp::imat conexx=conexiones(10,6,10);
   
-  cout<<conex<<endl;
+  
+  Random seed_uran1; 
+  int Cseed=seed_uran1.strong();
+  
+  itpp::RNG_reset(Cseed);
+  
+  conexiones(10,6,10);
   
   
   

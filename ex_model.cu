@@ -617,16 +617,13 @@ void modelConexRand(double *dev_R, double *dev_I, itpp::vec js, double j, double
     }
   //la interaccion VARIABLE  A B
   int num_conex=10;
-  itpp::imat conexiones=itpp::zeros_i(xlen,nqubits-xlen-1);
-  int ac=itpp::randi(0,xlen-1);
-  int bc=itpp::randi(xlen,nqubits-2);
-  for(int i=0;i<=num_conex;i++) {
-    while(conexiones(ac,bc-xlen)==1) {
-      ac=itpp::randi(0,xlen-1);
-      bc=itpp::randi(xlen,nqubits-2);
+  itpp::imat conex=conexiones(num_conex,xlen,nqubits-xlen-1);
+  for(int i=0;i<xlen;i++) {
+    for(int j=0;j<nqubits-xlen-1;j++) {
+      if(conex(i,j)==1) {
+        Ui_kernel<<<numblocks,numthreads>>>(i,j+xlen,dev_R,dev_I,cos(jp),sin(jp),l);
       }
-    Ui_kernel<<<numblocks,numthreads>>>(ac,bc,dev_R,dev_I,cos(jp),sin(jp),l);
-    conexiones(ac,bc-xlen)=1;
+    }
   }
   //se hace la interacion 0 con A
   Ui_kernel<<<numblocks,numthreads>>>(nqubits-1,2,dev_R,dev_I,cos(j),sin(j),l);
