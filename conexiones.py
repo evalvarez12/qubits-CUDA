@@ -38,18 +38,23 @@ def conexiones(numero_total,dima,dimb) :
     num=num-1
   return conex
 
-def to_mat(vec,dima,dimb) :
-  mat=zeros((dima,dimb),dtype=int)
+def to_mat(vec,num,dima,dimb) :
+  mat=zeros((num+1,2),dtype=int)
+  mat[0][0]=num
+  mat[0][1]=0
+  k=1
   for i in range(dima) :
     for j in vec[i] :
-      mat[i][j]=1
+      mat[k][0]=i
+      mat[k][1]=j
+      k+=1
   return mat
 
 
 
 
 def set_conexiones(num,dima,dimb) :
-  a = to_mat(conexiones(num,dima,dimb),dima,dimb)
+  a = to_mat(conexiones(num,dima,dimb),num,dima,dimb)
   savetxt('conexiones.txt', a,fmt='%u')
 
     

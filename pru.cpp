@@ -49,13 +49,30 @@ int main(int argc,char* argv[]) {
 // itpp::imat conexx=conexiones(10,6,10);
   
   
-  Random seed_uran1; 
-  int Cseed=seed_uran1.strong();
+  itpp::ivec conA,conB;
   
-  itpp::RNG_reset(Cseed);
-  
-  conexiones(10,6,10);
-  
-  
-  
+
+ifstream con;
+    con.open("conexiones.txt");
+    
+    int len, nada;
+    
+    con >> len >> nada;
+    
+    itpp::ivec conX(len);
+    
+    conA=conX;
+    conB=conX;
+    
+    for(int i=0;i<len;i++) {
+      con >> conA(i) >> conB(i);
+    }
+    con.close();
+
+    cout<<conA<<endl;
+    cout<<conB<<endl;
+    
 }
+  
+  
+  

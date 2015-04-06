@@ -553,30 +553,7 @@ itpp::cvec tensor_prod(itpp::cvec a, itpp::cvec b) {
   return c;
 }
  
-bool in(int a, itpp::ivec b) {
-  for(int i=0;i<b.size();i++) {
-    if (b(i)==a) {
-      return true;
-    }
-  }
-  return false;
-}
 
-void conexiones(int num,int dima,int dimb) {
-  itpp::imat conex = itpp::zeros_i(dima,dimb);
-  int a=itpp::randi(0,dima-1);
-  int b=itpp::randi(0,dimb-1);
-  for(int i=0;i<num;i++) {
-    while(conex(a,b)==1) {
-      a=itpp::randi(0,dima);
-      b=itpp::randi(0,dimb);
-      }
-      cout<<a<<" "<<b<<" "<<conex(a,b)<<endl;
-    conex(a,b)=1;
-  }
-  cout<<conex<<endl;
-  //return conex;
-}
   
 
   

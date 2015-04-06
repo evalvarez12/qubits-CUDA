@@ -4,7 +4,7 @@
 # include "cuda_functions.cu"
 namespace model{
  
-void model1(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra){ 
+void model1(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra,itpp::ivec conA, itpp::ivec conB){ 
   /*      MODEL 1
              *
            *   *   
@@ -28,7 +28,7 @@ void model1(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itp
   return;  
   }
   
-void model11(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra){ 
+void model11(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra,itpp::ivec conA, itpp::ivec conB){ 
   /*      MODEL 1.1
              *
            * | *   
@@ -55,7 +55,7 @@ void model11(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, it
   return;  
   }  
 
-void model2(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra){ 
+void model2(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra,itpp::ivec conA, itpp::ivec conB){ 
   /*      MODEL 2
              *
            *   * - 
@@ -83,7 +83,7 @@ void model2(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itp
   }
   
   
-void chain(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra){ 
+void chain(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL CHAIN CLOSED
              *
            *   * 
@@ -106,7 +106,7 @@ void chain(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp
   }  
   
   
-void chain_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra){ 
+void chain_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL CHAIN OPEN
 
     *  *  *  *  *  *  *  *  *  
@@ -125,7 +125,7 @@ void chain_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp,
   return;  
   }
   
-void lattice(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void lattice(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL LATTICE
        
        *   *   *   *
@@ -151,7 +151,7 @@ void lattice(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, it
   return;  
   }
   
-void model3(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void model3(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL 3 CLOSED
        
    <- *   *   *   *   *   *   *  ->
@@ -185,7 +185,7 @@ void model3(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itp
   return;  
   } 
   
-void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL 3 OPEN
        
       *   *   *   *   *   *   *  
@@ -219,7 +219,7 @@ void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
   return;  
   } 
   
-void model4(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void model4(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL 4 CLOSED
        
    <- *   *   *   *   *   *   *  ->
@@ -255,7 +255,7 @@ void model4(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itp
   return;  
   } 
   
-void model4_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void model4_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL 4 OPEN
        
   *   *   *   *   *   *   *
@@ -292,7 +292,7 @@ void model4_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
   return;  
   }
   
-void model5(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void model5(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL 5 CLOSED
        
   <- *   *   *   *   *   *  ->
@@ -328,7 +328,7 @@ void model5(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itp
   return;  
   }  
   
-void model5_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void model5_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL 5 OPEN
        
   *   *   *   *   *   * 
@@ -364,7 +364,7 @@ void model5_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
   return;  
   }
   
-void model6(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void model6(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL 6 CLOSED
  <-*   *   *   *   *   *  ->    
     \     /     \     /
@@ -402,7 +402,7 @@ void model6(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itp
   }
   
   
-void model7(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void model7(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL 7 CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -448,7 +448,7 @@ void model7(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itp
   return;  
   }  
   
-void model8(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void model8(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL 8 CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -502,7 +502,7 @@ void model8(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itp
   return;  
   }
   
-void modelVar(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *

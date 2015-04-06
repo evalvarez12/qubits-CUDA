@@ -3,7 +3,7 @@
 
 namespace extra_model{
 
-void modelVar1(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar1(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -36,7 +36,7 @@ void modelVar1(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, 
     }
   return;  
   }
-void modelVar2(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar2(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -70,7 +70,7 @@ void modelVar2(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, 
     }
   return;  
   }
-void modelVar3(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar3(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -105,7 +105,7 @@ void modelVar3(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, 
     }
   return;  
   }
-void modelVar4(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar4(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -141,7 +141,7 @@ void modelVar4(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, 
     }
   return;  
   }
-void modelVar5(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar5(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -178,7 +178,7 @@ void modelVar5(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, 
     }
   return;  
   }
-void modelVar6(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar6(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -216,7 +216,7 @@ void modelVar6(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, 
     }
   return;  
   }
-void modelVar7(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar7(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -255,7 +255,7 @@ void modelVar7(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, 
     }
   return;  
   }
-void modelVar8(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar8(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -295,7 +295,7 @@ void modelVar8(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, 
     }
   return;  
   }
-void modelVar9(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar9(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -336,7 +336,7 @@ void modelVar9(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, 
     }
   return;  
   }
-void modelVar10(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar10(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -378,7 +378,7 @@ void modelVar10(double *dev_R, double *dev_I, itpp::vec js, double j, double jp,
     }
   return;  
   }
-void modelVar11(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar11(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -421,7 +421,7 @@ void modelVar11(double *dev_R, double *dev_I, itpp::vec js, double j, double jp,
     }
   return;  
   }
-void modelVar12(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar12(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -465,7 +465,7 @@ void modelVar12(double *dev_R, double *dev_I, itpp::vec js, double j, double jp,
     }
   return;  
   }
-void modelVar13(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar13(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -510,7 +510,7 @@ void modelVar13(double *dev_R, double *dev_I, itpp::vec js, double j, double jp,
     }
   return;  
   }
-void modelVar14(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelVar14(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -556,7 +556,7 @@ void modelVar14(double *dev_R, double *dev_I, itpp::vec js, double j, double jp,
     }
   return;  
   }
-void modelConexComplete(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelConexComplete(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -593,7 +593,7 @@ void modelConexComplete(double *dev_R, double *dev_I, itpp::vec js, double j, do
     }
   return;  
   }
-void modelConexRand(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen){ 
+void modelConexRand(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
   /*    MODEL VARIABLE CASO ESPECIAL
        
   *   *   *   *   *   *   *
@@ -616,14 +616,9 @@ void modelConexRand(double *dev_R, double *dev_I, itpp::vec js, double j, double
     Ui_kernel<<<numblocks,numthreads>>>(i+xlen,i+1+xlen,dev_R,dev_I,cos(js(i)),sin(js(i)),l);
     }
   //la interaccion VARIABLE  A B
-  int num_conex=10;
-  itpp::imat conex=conexiones(num_conex,xlen,nqubits-xlen-1);
-  for(int i=0;i<xlen;i++) {
-    for(int j=0;j<nqubits-xlen-1;j++) {
-      if(conex(i,j)==1) {
-        Ui_kernel<<<numblocks,numthreads>>>(i,j+xlen,dev_R,dev_I,cos(jp),sin(jp),l);
-      }
-    }
+  int num_conex=conA.size();
+  for(int i=0;i<num_conex;i++) {
+    Ui_kernel<<<numblocks,numthreads>>>(conA(i),conB(i)+xlen,dev_R,dev_I,cos(jp),sin(jp),l);
   }
   //se hace la interacion 0 con A
   Ui_kernel<<<numblocks,numthreads>>>(nqubits-1,2,dev_R,dev_I,cos(j),sin(j),l);

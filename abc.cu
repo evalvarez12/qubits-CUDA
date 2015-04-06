@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <cstdlib>
 #include <itpp/itbase.h>
 #include <cpp/dev_random.cpp>
 #include <cpp/itpp_ext_math.cpp>
@@ -59,8 +61,10 @@ int main(int argc,char* argv[]) {
   int l=pow(2,nqubits);    
   int nqubits_env,xl;
   
+  itpp::ivec conxA,conxB;
+  
   //Se elige el modelo a usar
-  void (*evolution)(double *, double *, itpp::vec, double, double, itpp::mat, int, int);
+  void (*evolution)(double *, double *, itpp::vec, double, double, itpp::mat, int, int, itpp::ivec, itpp::ivec);
   if(model=="model1") {
     evolution=model::model1;
     nqubits_env=nqubits-1;
@@ -180,6 +184,23 @@ int main(int argc,char* argv[]) {
   if(model=="modelConexRand") {
     evolution=extra_model::modelConexRand;
     nqubits_env=nqubits-1;
+    
+    ifstream con;
+    con.open("conexiones.txt");
+    
+    int len, nada;
+    
+    con >> len >> nada;
+    
+    itpp::ivec conX(len);
+    
+    conxA=conX;
+    conxB=conX;
+    
+    for(int i=0;i<len;i++) {
+      con >> conxA(i) >> conxB(i);
+    }
+    con.close();
   }
   
 
@@ -258,7 +279,7 @@ int main(int argc,char* argv[]) {
       //       
       //       cout<<itpp::trace(rho)<<endl;
       
-      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
       
       evcuda::cuda2itpp(state,dev_R,dev_I);
       
@@ -269,11 +290,25 @@ int main(int argc,char* argv[]) {
   
   if(option=="purity_onet") {
     for(int it=0;it<numt;it++) {
-      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
     }
     evcuda::cuda2itpp(state,dev_R,dev_I);
     cout<<std::real(evmath::purity_last_qubit(state,l))<<endl;
-  }  
+  }
+  
+  if(option=="purity_gamma") {
+    itpp::cvec zerostate=state;
+    int div=75;
+    for(int gi=0;gi<div;gi++) {
+      double Jpi=((itpp::pi/2*gi)/div);
+      evcuda::itpp2cuda(zerostate,dev_R,dev_I);
+      for(int it=0;it<numt;it++) {
+        evolution(dev_R,dev_I,js,J,Jpi,b,nqubits,xlen,conxA,conxB);
+      }
+      evcuda::cuda2itpp(state,dev_R,dev_I);
+      cout<<std::real(evmath::purity_last_qubit(state,l))<<endl;
+    }
+  }
   
   if(option=="purity_all_systems") {
     int whichA,whichB,whichC;
@@ -295,7 +330,7 @@ int main(int argc,char* argv[]) {
 
       cout<<real(trace(rhoA))<<" "<<real(itpp::trace(rhoB))<<" "<<real(evmath::purity_last_qubit(state,l))<<endl;
       
-      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
       
       evcuda::cuda2itpp(state,dev_R,dev_I);
       
@@ -311,11 +346,11 @@ int main(int argc,char* argv[]) {
       double Ji=((itpp::pi*ij)/div);
       evcuda::itpp2cuda(zerostate,dev_R,dev_I);
       for(int i=0;i<100;i++) {
-	evolution(dev_R,dev_I,js,J,Ji,b,nqubits,xlen);
+	evolution(dev_R,dev_I,js,J,Ji,b,nqubits,xlen,conxA,conxB);
       }
       for(int i=0;i<100;i++) {
 	evcuda::cuda2itpp(state,dev_R,dev_I);
-	evolution(dev_R,dev_I,js,J,Ji,b,nqubits,xlen);
+	evolution(dev_R,dev_I,js,J,Ji,b,nqubits,xlen,conxA,conxB);
 	purities(i)=std::real(evmath::purity_last_qubit(state,l));
       }
       cout<<Ji<<" "<<itpp::mean(purities)<<" "<<std::sqrt(itpp::variance(purities))<<endl;    
@@ -326,17 +361,17 @@ int main(int argc,char* argv[]) {
   if(option=="test_Umat") {
     itpp::cmat U;
     if(symr.getValue()==0) {
-      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen);
+      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,conxA,conxB);
     }
     else { 
-      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,symr.getValue());
+      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,conxA,conxB,symr.getValue());
     }
     int rcont = U.rows();
     //Prueba unitariedad
     cout<<itpp::norm(itpp::eye_c(rcont)-U*itpp::hermitian_transpose(U))<<endl;
     //Prueba de evoluciones
     itpp::cvec state2 = U * state;
-    evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+    evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
     evcuda::cuda2itpp(state,dev_R,dev_I);
     cout<<itpp::norm(state-state2)<<endl;  
   }
@@ -344,10 +379,10 @@ int main(int argc,char* argv[]) {
   if(option=="get_spectra") {
     itpp::cmat U;
     if(symr.getValue()==0) {
-      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen);
+      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,conxA,conxB);
     }
     else { 
-      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,symr.getValue());
+      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,conxA,conxB,symr.getValue());
     }
     int rcont = U.rows();
     itpp::cvec eigenvalues(rcont);
@@ -387,8 +422,8 @@ int main(int argc,char* argv[]) {
       evcuda::cuda2itpp(sumstate,dev_sumdxR,dev_sumdxI);
       evcuda::cuda2itpp(state,dev_inR,dev_inI);
       
-      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
-      evolution(dev_inR,dev_inI,js,J,Jp,b,nqubits,xlen);
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
+      evolution(dev_inR,dev_inI,js,J,Jp,b,nqubits,xlen,conxA,conxB);
       
       cout<<sqrt(std::norm(itpp::dot(itpp::conj(sumstate),state)))/nqubits<<endl;
     }
@@ -425,8 +460,8 @@ int main(int argc,char* argv[]) {
 	b(0)=bxi; b(2)=bzi;
 	
 	for(int i=0;i<80;i++) {
-	  evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
-	  evolution(dev_inR,dev_inI,js,J,Jp,b,nqubits,xlen);
+	  evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
+	  evolution(dev_inR,dev_inI,js,J,Jp,b,nqubits,xlen,conxA,conxB);
 	}
 	
 	for(int i=0;i<20;i++) {
@@ -435,8 +470,8 @@ int main(int argc,char* argv[]) {
 	  evcuda::cuda2itpp(sumstate,dev_sumdxR,dev_sumdxI);
 	  evcuda::cuda2itpp(state,dev_inR,dev_inI);
 	  
-	  evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
-	  evolution(dev_inR,dev_inI,js,J,Jp,b,nqubits,xlen);
+	  evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
+	  evolution(dev_inR,dev_inI,js,J,Jp,b,nqubits,xlen,conxA,conxB);
 	  
 	  correlations(i)=sqrt(std::norm(itpp::dot(itpp::conj(sumstate),state)))/nqubits;
 	}
@@ -452,7 +487,7 @@ int main(int argc,char* argv[]) {
     
     itpp::cvec stateBra=state; 
     for(int t=0;t<numt;t++) {
-      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
       evcuda::cuda2itpp(state,dev_R,dev_I);
       cout<<t+1<<" "<<norm(itpp::dot(itpp::conj(stateBra),state))<<endl;  
     }
@@ -463,7 +498,7 @@ int main(int argc,char* argv[]) {
   if(option=="carlostest_chain") {
     itpp::cvec cstate = state;
     //CUDA evolution
-    evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen);
+    evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
     evcuda::cuda2itpp(state,dev_R,dev_I);
     //Carlos evolution
     for(int i=0;i<nqubits;i++) {

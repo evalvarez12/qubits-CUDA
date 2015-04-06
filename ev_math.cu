@@ -2,9 +2,9 @@
 # define EVMATH
 namespace evmath{
 
-typedef void (*operador_evolucion)(double *, double *, itpp::vec, double, double, itpp::mat, int, int);
+typedef void (*operador_evolucion)(double *, double *, itpp::vec, double, double, itpp::mat, int, int, itpp::ivec, itpp::ivec);
 
-itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j, double jp, itpp::mat b ,  int nqubits, int extra)  {
+itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j, double jp, itpp::mat b ,  int nqubits, int extra, itpp::ivec A, itpp::ivec B)  {
   int l = pow(2,nqubits);
   double *dev_umatR,*dev_umatI;
   evcuda::cmalloc(&dev_umatR,&dev_umatI,l);
@@ -14,7 +14,7 @@ itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j
   itpp::cmat Umat(l,l);
   for(int i=0;i<l;i++) {
     index_one<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,l,i);
-    evolucion(dev_umatR,dev_umatI,js,j,jp,b,nqubits,extra);
+    evolucion(dev_umatR,dev_umatI,js,j,jp,b,nqubits,extra,A,B);
     evcuda::cuda2itpp(state,dev_umatR,dev_umatI);
     Umat.set_col(i,state);
   }
@@ -23,7 +23,7 @@ itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j
   return Umat;
 }
 
-itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j, double jp, itpp::mat b ,  int nqubits, int extra, int symr)  { 
+itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j, double jp, itpp::mat b ,  int nqubits, int extra, itpp::ivec A, itpp::ivec B, int symr)  { 
   //SECTORES DE SIMETRIA POR REFLEXION
   int l = pow(2,nqubits);
   double *dev_umatR,*dev_umatI;
@@ -58,7 +58,7 @@ itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j
     reflection_proyector<<<1,1>>>(dev_umatR,dev_umatI,nqubits,symr,S[i]);
     times_norm<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,l); 
   
-    evolucion(dev_umatR,dev_umatI,js,j,jp,b,nqubits,extra);
+    evolucion(dev_umatR,dev_umatI,js,j,jp,b,nqubits,extra,A,B);
    
     to_zero<<<numblocks,numthreads>>>(dev_dotR,dev_dotI,rcont); 
     proyected_dot_reflection<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,dev_dotR,dev_dotI,nqubits,rcont,symr,dev_S);
