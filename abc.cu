@@ -187,7 +187,6 @@ int main(int argc,char* argv[]) {
     
     ifstream con;
     con.open("conexiones.txt");
-    
     int len, nada;
     
     con >> len >> nada;
@@ -196,7 +195,6 @@ int main(int argc,char* argv[]) {
     
     conxA=conX;
     conxB=conX;
-    
     for(int i=0;i<len;i++) {
       con >> conxA(i) >> conxB(i);
     }
@@ -300,7 +298,7 @@ int main(int argc,char* argv[]) {
     itpp::cvec zerostate=state;
     int div=75;
     for(int gi=0;gi<div;gi++) {
-      double Jpi=((itpp::pi/2*gi)/div);
+      double Jpi=((itpp::pi/2*gi)/div)/sqrt(Jp);
       evcuda::itpp2cuda(zerostate,dev_R,dev_I);
       for(int it=0;it<numt;it++) {
         evolution(dev_R,dev_I,js,J,Jpi,b,nqubits,xlen,conxA,conxB);
