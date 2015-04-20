@@ -297,7 +297,7 @@ int main(int argc,char* argv[]) {
   if(option=="purity_gamma") {
     itpp::cvec zerostate=state;
     int div=75;
-    for(int gi=0;gi<div;gi++) {
+    for(int gi=0;gi<=div;gi++) {
       double Jpi=((itpp::pi/2*gi)/div)/sqrt(Jp);
       evcuda::itpp2cuda(zerostate,dev_R,dev_I);
       for(int it=0;it<numt;it++) {

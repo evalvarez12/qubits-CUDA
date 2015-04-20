@@ -45,5 +45,5 @@ Lambda_openmp
 **/*synctex.gz
 notes.pdf
 *.dat
-
+*.txt
 
