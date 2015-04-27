@@ -18,15 +18,15 @@ import os
 #labels=['$\gamma=50\lambda$','$\gamma=100\lambda$','$\gamma=300\lambda$','$\gamma=500\lambda$','$\gamma=800\lambda$','$\gamma=1000\lambda$','$\gamma=1400\lambda$']
 jps=linspace(0,pi/2,75)
 a=loadtxt("grafica2.dat")
-plot(jps,a,'k')
+plot(jps,a)
 
 
-xlabel("$\gamma$",fontsize=22)
-xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=15)
+xlabel("$\gamma$",fontsize=28)
+xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 
 
-yticks((1,0.9,0.8,0.7,0.6,0.5),('$1$','$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=15)
-ylabel("$P$",fontsize=22)
+yticks((0.8,0.7,0.6,0.5),('$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
+ylabel("$P$",fontsize=28)
 
 
 

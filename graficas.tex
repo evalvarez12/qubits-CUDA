@@ -1,0 +1,157 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage[spanish,mexico]{babel}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{marvosym}
+\usepackage{wrapfig}
+\usepackage{breqn}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+%Paréntesis
+\newcommand{\p}[1]{\left( #1 \right)}
+\newcommand{\pc}[1]{\left[ #1 \right]}
+\newcommand{\pco}[1]{\left\{ #1 \right\}}
+\newcommand{\ang}[1]{\left\langle #1 \right\rangle}
+\newcommand{\pp}[2]{\{ #1 , #2 \}}
+\newcommand{\pb}[1]{\left\lbrace #1 \right\rbrace}
+\newcommand{\w}[2]{d #1 \wedge d #2}
+
+%Funciones y Operadores
+\newcommand{\sint}{\sin \p{\theta}}
+\newcommand{\cost}{\cos \p{\theta}}
+
+\newcommand{\sintu}{\sin {\theta_1}}
+\newcommand{\costu}{\cos {\theta_1}}
+\newcommand{\sintd}{\sin {\theta_2}}
+\newcommand{\costd}{\cos {\theta_2}}
+\newcommand{\cosr}{\cos \p{\theta_1 - \theta_2}}
+\newcommand{\sinr}{\sin \p{\theta_1 - \theta_2}}
+\newcommand{\coscr}{\cos^2 \p{\theta_1 - \theta_2}}
+\newcommand{\sincr}{\sin^2 \p{\theta_1 - \theta_2}}
+
+\newcommand{\sinp}{\sin \p{\varphi}}
+\newcommand{\cosp}{\cos \p{\varphi}}
+\newcommand{\sina}{\sin \p{\alpha}}
+\newcommand{\cosa}{\cos \p{\alpha}}
+\newcommand{\sinb}{\sin \p{\beta}}
+\newcommand{\cosb}{\cos \p{\beta}}
+\newcommand{\sinc}{\sin \p{\gamma}}
+\newcommand{\cosc}{\cos \p{\gamma}}
+\newcommand{\sintc}{\sin^2 \p{\theta}}
+\newcommand{\costc}{\cos^2 \p{\theta}}
+\newcommand{\sinl}{\sin\p{\lambda}}
+\newcommand{\cosl}{\cos\p{\lambda}}
+\newcommand{\sinql}{\sin^2\p{\lambda}}
+\newcommand{\cosql}{\cos^2\p{\lambda}}
+\newcommand{\cotl}{\cot\p{\lambda}}
+
+
+%Derivadas
+\newcommand{\dt}{\frac{d}{dt}}
+\newcommand{\dtt}{\frac{d^2}{dt^2}}
+\newcommand{\pt}{\frac{\partial}{\partial t}}
+\newcommand{\dth}{\dot{\theta}}
+\newcommand{\dor}{\dot{r}}
+\newcommand{\dop}{\dot{p}}
+\newcommand{\dox}{\dot{x}}
+\newcommand{\doxi}{\dot{x}_i}
+\newcommand{\doxj}{\dot{x}_j}
+\newcommand{\dopi}{\dot{p}_i}
+\newcommand{\partxj}{\partial_{x_j}}
+\newcommand{\partxi}{\partial_{x_i}}
+\newcommand{\partpi}{\partial_{p_i}}
+\newcommand{\bdr}{\dot{\bm{r}}}
+\newcommand{\br}{\bm{r}}
+\newcommand{\lpl}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\lspc}[3]{\frac{\partial ^2 #1}{\partial #2 \partial #3}}
+\newcommand{\lspl}[2]{\frac{\partial ^2 #1}{\partial #2 ^2}}
+\newcommand{\sech}{\text{sech}}
+\newcommand{\partt}{\partial_t}
+\newcommand{\parttt}{\partial_{tt}}
+\newcommand{\parti}{\partial_i}
+\newcommand{\partii}{\partial_{ii}}
+\newcommand{\partj}{\partial_j}
+\newcommand{\partjj}{\partial_{jj}}
+\newcommand{\partij}{\partial_{ij}}
+\newcommand{\partji}{\partial_{ji}}
+\newcommand{\partx}{\partial_x}
+\newcommand{\partxx}{\partial_{xx}}
+\newcommand{\curl}{\nabla\times}
+
+
+
+%Otras
+\newcommand{\um}{\frac{1}{2}}
+\newcommand{\eijk}{\epsilon_{ijk}}
+\newcommand{\ejki}{\epsilon_{jkk}}
+\newcommand{\ekij}{\epsilon_{kij}}
+\newcommand{\ejik}{\epsilon_{jik}}
+\newcommand{\eikj}{\epsilon_{ikj}}
+\newcommand{\eklm}{\epsilon_{klm}}
+\newcommand{\D}[1]{\delta_{#1}}
+
+
+%Funciones Específicas
+\newcommand{\lext}{L_{ext}}
+\newcommand{\srho}{\sqrt{\rho}}
+\newcommand{\srhoc}{\sqrt{\rho_0}}
+\newcommand{\srhou}{\sqrt{\rho_u}}
+\newcommand{\ru}{\rho_1}
+\newcommand{\rc}{\rho_0}
+\newcommand{\vu}{\bm{v}_1}
+\newcommand{\eil}{e^{i\frac{q}{\hbar c}\Lambda}}
+\newcommand{\qhc}{i\frac{q}{\hbar c}}
+\newcommand{\hDm}{-\frac{\hbar^2}{2m}}
+\newcommand{\DM}{\frac{1}{2m}}
+\newcommand{\QC}{\frac{q}{c}}
+\newcommand{\bra}[1]{\langle #1 |}
+\newcommand{\ket}[1]{| #1 \rangle}
+\newcommand{\braket}[1]{\langle #1 \rangle}
+
+%Formato
+\newcommand{\lsp}{\hspace{.15cm}}
+\newcommand{\lsep}[2]{\hspace{#1cm}\text{#2}\hspace{#1cm}}
+
+%Ambientes
+\newcommand{\beq}[1]{\begin{equation} #1 \end{equation}}
+\newenvironment{enumerateL}{\begin{enumerate}\renewcommand{\theenumi}{\Alph{enumi}}}{\end{enumerate}}
+
+\usepackage{color}
+\title{Gráficas}
+\begin{document}
+\maketitle
+
+
+IMPORTANTE: Siempre $ \lambda=0.01$ y $dim({\rm NEAR})=6$ $dim({\rm FAR})=10$. A menos que se especifique lo contrario.
+\begin{itemize}
+
+\item Gráfica 1: $P \times t$ para el modelo de la figura 2 (la linea).
+
+\item Gráfica 2: $P \times \gamma$ para el modelo de la figura 2 (la linea) variando $\gamma$. Planeamos 
+agregar a esta grafica mas lineas correspondientes a cuando se hacen mas conexiones dentro de los ambientes.
+
+\item Gráfica 3: $log_{10}(1-P) \times \lambda$ para un modelo con 6 conexiones entre el near y el far.
+
+\item Gráfica 4-1: $P \times \gamma$ variando el numero de conexiones $\nu$ entre ambientes.
+
+\item Gráfica 4-2: $P \times \gamma$ Para cada linea se usa la gamma escalada $\gamma^\prime = \frac{\gamma}{\sqrt{\gamma}}$. Planeamos
+que una parte de esta grafica puede ser el inset de la gráfica 4-3.
+
+\item Gráfica 4-3: $P \times t$ variando el numero de conexiones $\nu$ entre ambientes. Se usa la gamma escalada $\gamma^\prime = \frac{0.8}{\sqrt{\gamma}}$
+
+\item Gráfica 5: $P \times \gamma$ para el modelo de la figura 2 (la linea). Variando la dimension de los ambientes 
+$dim({\rm NEAR})=A$ $dim({\rm FAR})=B$
+
+\item Gráfica 6: $log_{10}(1-P) \times \gamma$ para el modelo de conexiones completas (Cada spin del near se conecta con todos los del far). Variando la $\lambda$.
+\end{itemize}
+
+\end{document}

@@ -19,21 +19,21 @@ import conexiones as conx
 #HACER grafica3
 lines=['o-','<-','p-','v-','*-','^-','h-','D-','>-','H-','d-','x-','s-','+-']
 jps=linspace(0,pi/2,75)
-nu="\mu"
+nu=r"\nu"
 
 for i in range(2,15,2) :
-  a=loadtxt("grafica4-2-"+str(i)+".dat")
-  plot(jps,a,'k'+lines[i-1],label="$"+nu+"="+str(i)+"$")
+  a=loadtxt("grafica4-"+str(i)+".dat")
+  plot(jps,a,lines[i-1],label="$"+nu+"="+str(i)+"$")
 
 
-xlabel("$\gamma$",fontsize=22)
-xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=15)
+xlabel("$\gamma$",fontsize=28)
+xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 
 
-yticks((1,0.9,0.8,0.7,0.6,0.5),('$1$','$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=15)
-ylabel("$P$",fontsize=22)
+yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
+ylabel("$P$",fontsize=28)
 
-legend(loc='upper left')
+legend(loc='lower center',fontsize=25)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
