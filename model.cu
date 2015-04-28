@@ -205,7 +205,7 @@ void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
     }  
   //la evolucion de la cadena B de tamaño nqubits - xlen - 1  
   for(int i=0;i<nqubits-2-xlen;i++) {
-    Ui_kernel<<<numblocks,numthreads>>>(i+xlen,i+1+xlen,dev_R,dev_I,cos(js(i)),sin(js(i)),l);
+    Ui_kernel<<<numblocks,numthreads>>>(i+xlen,i+1+xlen,dev_R,dev_I,cos(js(i+xlen)),sin(js(i+xlen)),l);
     }
   //la interaccion A B  
   Ui_kernel<<<numblocks,numthreads>>>(xlen-1,xlen,dev_R,dev_I,cos(jp),sin(jp),l);

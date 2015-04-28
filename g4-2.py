@@ -17,12 +17,17 @@ import conexiones as conx
   
   
 #HACER grafica3
-lines=['o-','<-','p-','v-','*-','^-','h-','D-','>-','H-','d-','x-','s-','+-']
+lines=['o-','<-','p-','v-','+-','^-','h-','D-','>-','H-','d-','s-','x-','*-']
 
 
-for i in range(1,15,2) :
+for i in range(2,15,2) :
   a=loadtxt("grafica4-2-pt-"+str(i)+".dat")
   plot(a,lines[i-1],markevery=60,label=r"$\nu="+str(i)+"$")
+  
+  
+  
+
+
 
 
 xlabel("$t$",fontsize=28)
@@ -41,4 +46,19 @@ tick_params(axis='both',          # changes apply to the x-axis
     length=10)
 
 
+
+#INSET
+ax = axes([.55, .65, .25, .2])
+jps=linspace(0,pi/2,75)
+
+for i in range(2,15,2) :
+  ains=loadtxt("grafica4-"+str(i)+".dat")
+  plot(jps,ains,lines[i-1])
+  xticks((0,pi/8,pi/4),('$0$','$\pi/8$','$\pi/4$'),fontsize=20)
+  yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=20)
+  setp(ax, xlim=(0,pi/4))
+  
+
+xlabel("$\gamma$",fontsize=20)
+ylabel("$P$",fontsize=20)
 show()

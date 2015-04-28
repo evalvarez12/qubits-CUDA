@@ -93,6 +93,14 @@ int main(int argc,char* argv[]) {
     evolution=model::model3_open;
     nqubits_env=nqubits-1;
   }
+  if(model=="model3_open_op1") {
+    evolution=extra_model::model3_open_op1;
+    nqubits_env=nqubits-1;
+  }
+  if(model=="model3_open_op2") {
+    evolution=extra_model::model3_open_op2;
+    nqubits_env=nqubits-1;
+  }  
   if(model=="model4") {
     evolution=model::model4;
     nqubits_env=nqubits-1;
