@@ -1,6 +1,6 @@
 from pylab import *
 import os
-
+import nodos as nod
 
 
 #OBTENER DATOS
@@ -28,15 +28,31 @@ op2=loadtxt("grafica2-op2.dat")
 
 op1=op1[:-1]
 op2=op2[:-1]
-plot(jps,op1,'k--')
-plot(jps,op2,'k--')
 
-for i in [3,6] :
-  b=loadtxt("grafica2-"+str(i)+".dat")
-  b=b[:-1]
-  plot(jps,b,'k--')
+
+fig=figure()
+
+fig.add_subplot(2,1,1)
+
+xticks([])
+yticks([])
+
+fig.add_subplot(2,3,1)
+nod.nodos1('A')
+fig.add_subplot(2,3,2)
+nod.nodos2('B')
+fig.add_subplot(2,3,3)
+nod.nodos3('C')
+
+
+fig.add_subplot(2,1,2)
+
+plot(jps,a,'o-',label='$A$')
+plot(jps,op1,'v-',label='$B$')
+plot(jps,op2,'D-',label='$C$')
+
   
-plot(jps,a,linewidth=2)
+
 xlabel("$\gamma$",fontsize=28)
 xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 
@@ -44,7 +60,7 @@ xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 yticks((0.8,0.7,0.6,0.5),('$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
 ylabel("$P$",fontsize=28)
 
-
+legend(loc='lower center',fontsize=25)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -53,5 +69,5 @@ tick_params(axis='both',          # changes apply to the x-axis
     labelbottom='on',
     length=10)
 
-
+fig.subplots_adjust(hspace=0,wspace=0)
 show()

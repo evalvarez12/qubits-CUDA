@@ -25,9 +25,7 @@ nu="\mu"
 labels=['A','B','C','D','E','F']
 
 fig=figure()
-title(r"$\nu=6$",fontsize=35)
-xticks([])
-yticks([])
+
 fig.add_subplot(2,1,1)
 
 xticks([])

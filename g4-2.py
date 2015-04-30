@@ -48,7 +48,7 @@ tick_params(axis='both',          # changes apply to the x-axis
 
 
 #INSET
-ax = axes([.55, .65, .25, .2])
+ax = axes([.55, .65, .33, .22])
 jps=linspace(0,pi/2,75)
 
 for i in range(2,15,2) :
