@@ -25,7 +25,7 @@ dims=[[6,10],[7,12],[8,14],[10,14]]
 
 for i in range(1,5) :
   a=loadtxt("grafica5-2-"+str(i)+".dat")
-  plot(jps,a,lines[i-1],label="$A="+str(dims[i-1][0])+"$ $B="+str(dims[i-1][1])+"$")
+  plot(jps,a,lines[i-1],label="$N_e="+str(dims[i-1][0])+"$ $N_{e^\prime}="+str(dims[i-1][1])+"$")
 
 
 xlabel("$\gamma$",fontsize=28)

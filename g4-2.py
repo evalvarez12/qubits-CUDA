@@ -54,11 +54,11 @@ jps=linspace(0,pi/2,75)
 for i in range(2,15,2) :
   ains=loadtxt("grafica4-"+str(i)+".dat")
   plot(jps,ains,lines[i-1])
-  xticks((0,pi/8,pi/4),('$0$','$\pi/8$','$\pi/4$'),fontsize=20)
-  yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=20)
+  xticks((0,pi/8,pi/4),('$0$','$\pi/8$','$\pi/4$'),fontsize=25)
+  yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
   setp(ax, xlim=(0,pi/4))
   
 
-xlabel("$\gamma$",fontsize=20)
-ylabel("$P$",fontsize=20)
+xlabel("$\gamma$",fontsize=28)
+ylabel("$P$",fontsize=28)
 show()
