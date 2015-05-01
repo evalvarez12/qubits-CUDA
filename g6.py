@@ -25,9 +25,7 @@ nu="\mu"
 labels=['A','B','C','D','E','F']
 
 fig=figure()
-title(r"$\nu=6$",fontsize=35)
-xticks([])
-yticks([])
+
 fig.add_subplot(2,1,1)
 
 xticks([])
@@ -37,7 +35,7 @@ for i in range(1,7) :
   conx=loadtxt("conexiones"+str(i)+".txt")
   conx=conx[1:]
   fig.add_subplot(4,3,i)
-  nod.nodos(conx,labels[i-1])
+  nod.nodos(conx,lines[i-1])
   
 
 
@@ -55,7 +53,7 @@ xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
 ylabel("$P$",fontsize=28)
 
-legend(loc='upper left',fontsize=25)
+#legend(loc='upper left',fontsize=25)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected

@@ -42,7 +42,7 @@ xlabel("$\lambda$",fontsize=28)
 #xticks(log(arange(0.000001,.1+.001,.05)),('$0$','$0.05$','$0.1$'),fontsize=15)
 xscale('log',basex=10)
 xticks((.001,0.01,.1),('$10^{-3}$','$10^{-2}$','$10^{-1}$'),fontsize=25)
-yticks((0,-2,-3),('$0$','$-2$','$-3$'),fontsize=25)
+yticks((0,-1,-2),('$0$','$-1$','$-2$'),fontsize=25)
 ylabel("$\log(1-P)$",fontsize=28)
 
 tick_params(axis='both',          # changes apply to the x-axis

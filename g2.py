@@ -6,7 +6,7 @@ import nodos as nod
 #OBTENER DATOS
 
 #dat_i=".dat"
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open --Jc 0.01 --Jp 1. --Js 1. --DJs 0.2 --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-4"
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open --Jc 0.01 --Jp 1. --Js 1. --DJs 0.2 --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2"
 #os.system(comando + dat_i)
 
 #comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open --Jc 0.01 --Jp 1. --Js 1. --DJs 0.2 --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-5"
@@ -38,11 +38,11 @@ xticks([])
 yticks([])
 
 fig.add_subplot(2,3,1)
-nod.nodos1('A')
+nod.nodos1('o')
 fig.add_subplot(2,3,2)
-nod.nodos2('B')
+nod.nodos2('v')
 fig.add_subplot(2,3,3)
-nod.nodos3('C')
+nod.nodos3('D')
 
 
 fig.add_subplot(2,1,2)
@@ -57,10 +57,10 @@ xlabel("$\gamma$",fontsize=28)
 xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 
 
-yticks((0.8,0.7,0.6,0.5),('$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
+yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
 ylabel("$P$",fontsize=28)
 
-legend(loc='lower center',fontsize=25)
+#legend(loc='lower center',fontsize=25)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected

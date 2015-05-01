@@ -12,7 +12,7 @@ g=0
 lambds=[0.01,0.005,0.003,0.001]
 for i in range(4)  :
   a=loadtxt("maxpur-completeconex-"+str(i+1)+".dat")
-  plot(jps,log10(1-a),lines[l],markevery=2,label="$\lambda="+str(lambds[i])+"$")
+  plot(jps,1-a,lines[l],markevery=2,label="$\lambda="+str(lambds[i])+"$")
   g+=1
   l+=1
   
@@ -26,8 +26,10 @@ for i in range(4)  :
 legend(loc='upper center',fontsize=25)
 xlabel("$\gamma$",fontsize=28)
 xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
-ylabel("$\log(1-P)$",fontsize=28)
-yticks((0,-1,-2,-3),('$0$','$-1$','$-2$','$-3$'),fontsize=25)
+ylabel("$1-P$",fontsize=28)
+yscale('log',basex=10)
+#yticks((0,-1,-2,-3),('$0$','$-1$','$-2$','$-3$'),fontsize=25)
+yticks((.001,0.01,.1,1),('$10^{-3}$','$10^{-2}$','$10^{-1}$','$10^0$'),fontsize=25)
 
 tick_params(axis='x',          # changes apply to the x-axis
     which='minor',      # both major and minor ticks are affected
