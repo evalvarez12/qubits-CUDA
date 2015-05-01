@@ -208,9 +208,9 @@ void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
     Ui_kernel<<<numblocks,numthreads>>>(i+xlen,i+1+xlen,dev_R,dev_I,cos(js(i+xlen)),sin(js(i+xlen)),l);
     }
   //la interaccion A B  
-  Ui_kernel<<<numblocks,numthreads>>>(2,10,dev_R,dev_I,cos(jp),sin(jp),l);
+  Ui_kernel<<<numblocks,numthreads>>>(4,10,dev_R,dev_I,cos(jp),sin(jp),l);
   //se hace la interacion 0 con A
-  Ui_kernel<<<numblocks,numthreads>>>(nqubits-1,0,dev_R,dev_I,cos(j),sin(j),l);
+  Ui_kernel<<<numblocks,numthreads>>>(nqubits-1,2,dev_R,dev_I,cos(j),sin(j),l);
   //evolucion patada magnetica
   for(int i=0;i<nqubits-1;i++) {
     set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
