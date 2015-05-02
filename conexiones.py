@@ -46,7 +46,7 @@ def to_mat(vec,num,dima,dimb) :
   for i in range(dima) :
     for j in vec[i] :
       mat[k][0]=i
-      mat[k][1]=j
+      mat[k][1]=j+dima
       k+=1
   return mat
 

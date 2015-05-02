@@ -38,7 +38,7 @@ import conexiones as conx
   
   
 #HACER grafica6
-lines=['o-','<-','p-','v-','*-','^-','h-','D-','>-','H-','d-','x-','s-','+-','D-','v-']
+lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
 jps=linspace(0,pi/2,76)
 nu="\mu"
 labels=['A','B','C','D','E','F']

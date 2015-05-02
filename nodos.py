@@ -64,7 +64,7 @@ def nodos(top,label) :
   G.add_edge(2,16,weight=1)
   
   for k in top :
-    G.add_edge(k[0],k[1]+6,weight=1)
+    G.add_edge(k[0],k[1],weight=1)
       
   weights = [G[u][v]['weight'] for u,v in G.edges()]
   ncolors = [G.node[x]['color'] for x in G.nodes()]
@@ -73,10 +73,10 @@ def nodos(top,label) :
   nx.draw(G,pos, width=weights,node_color=ncolors,with_labels=False)
   
   #text(-3,-0.0,'$'+label+'$',fontsize=25)
-  plot(-3,-0.0,'k'+label,markersize=10)
+  plot(-3,-0.0,label,markersize=10)
     
     
-def nodosNotConected(top,label) :
+def nodosAC(top,label) :
   
   G = nx.Graph()
   
@@ -111,6 +111,7 @@ def nodosNotConected(top,label) :
     G.add_edge(j,j+1,weight=4)
       
 
+  G.add_edge(2,10,weight=1)
   
   for k in top :
     G.add_edge(k[0],k[1],weight=1)
@@ -122,7 +123,7 @@ def nodosNotConected(top,label) :
   nx.draw(G,pos, width=weights,node_color=ncolors,with_labels=False)
   
   #text(-3,-0.0,'$'+label+'$',fontsize=25)
-  plot(-3,-0.0,'k'+label,markersize=10)
+  plot(-3,-0.0,label,markersize=10)
     
     
     

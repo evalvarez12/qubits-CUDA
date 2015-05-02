@@ -208,6 +208,25 @@ int main(int argc,char* argv[]) {
     }
     con.close();
   }
+  if(model=="modelConexRandB") {
+    evolution=extra_model::modelConexRandB;
+    nqubits_env=nqubits-1;
+    
+    ifstream con;
+    con.open("conexiones.txt");
+    int len, nada;
+    
+    con >> len >> nada;
+    
+    itpp::ivec conX(len);
+    
+    conxA=conX;
+    conxB=conX;
+    for(int i=0;i<len;i++) {
+      con >> conxA(i) >> conxB(i);
+    }
+    con.close();
+  }  
   
 
   
