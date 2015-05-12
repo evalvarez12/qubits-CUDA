@@ -125,6 +125,54 @@ def nodosAC(top,label) :
   #text(-3,-0.0,'$'+label+'$',fontsize=25)
   plot(-3,-0.0,label,markersize=10)
     
+
+def nodosABC(top,label) :
+  
+  G = nx.Graph()
+  
+  #A
+  G.add_node(0,pos=(0,0),color='0.8')
+  G.add_node(1,pos=(1,0),color='0.8')
+  G.add_node(2,pos=(2,0),color='0.8')
+  G.add_node(3,pos=(3,0),color='0.8')
+  G.add_node(4,pos=(4,0),color='0.8')
+  G.add_node(5,pos=(5,0),color='0.8')
+  
+  #B
+  G.add_node(6,pos=(-2,0.5),color='0.4')
+  G.add_node(7,pos=(-1,0.5),color='0.4')
+  G.add_node(8,pos=(0,0.5),color='0.4')
+  G.add_node(9,pos=(1,0.5),color='0.4')
+  G.add_node(10,pos=(2,0.5),color='0.4')
+  G.add_node(11,pos=(3,0.5),color='0.4')
+  G.add_node(12,pos=(4,0.5),color='0.4')
+  G.add_node(13,pos=(5,0.5),color='0.4')
+  G.add_node(14,pos=(6,0.5),color='0.4')
+  G.add_node(15,pos=(7,0.5),color='0.4')
+  
+  #C
+  G.add_node(16,pos=(2.5,-0.5),color='white')
+  
+  
+  for i in range(5) :
+    G.add_edge(i,i+1,weight=4)
+    
+  for j in range(6,15) :
+    G.add_edge(j,j+1,weight=4)
+      
+  
+  for k in top :
+    G.add_edge(k[0],k[1],weight=1)
+      
+  weights = [G[u][v]['weight'] for u,v in G.edges()]
+  ncolors = [G.node[x]['color'] for x in G.nodes()]
+      
+  pos=nx.get_node_attributes(G,'pos')
+  nx.draw(G,pos, width=weights,node_color=ncolors,with_labels=False)
+  
+  #text(-3,-0.0,'$'+label+'$',fontsize=25)
+  plot(-3,-0.0,label,markersize=10)
+    
     
     
 def nodos1(label) :

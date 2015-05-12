@@ -10,9 +10,9 @@ import nodos as nod
 
 #OBTENER DATOS
 #for i in range(1,7) :
-  #os.system("cp conexionesA"+str(i)+".txt conexiones.txt " )
+  #os.system("cp conexionesABC-2-"+str(i)+".txt conexiones.txt " )
   #dat_i=str(i)+".dat"
-  #comando = "./abc -o purity_gamma -q 17 --x 6 --model modelConexRand --Jc 0.01 --Jp 1 --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 9678  > grafica8-"
+  #comando = "./abc -o purity_gamma -q 17 --x 6 --model modelConexRandABC --Jc 0.01 --Jp 1 --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 9678  > grafica7-3-"
   #os.system(comando + dat_i)
   #print i
 
@@ -20,7 +20,7 @@ import nodos as nod
   
   
   
-##HACER grafica6
+#HACER grafica6
 lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
 jps=linspace(0,pi/2,76)
 nu="\mu"
@@ -38,17 +38,17 @@ yticks([])
 conexionesB=[[[16,0],[2,10]],[[16,1],[2,10]],[[16,3],[2,10]],[[16,4],[2,10]],[[16,5],[2,10]],[[16,2],[2,10]]]
 
 for i in range(1,7) :
-  conx=loadtxt("conexionesA"+str(i)+".txt")
+  conx=loadtxt("conexionesABC-2-"+str(i)+".txt")
   conx=conx[1:]
   fig.add_subplot(4,3,i)
-  nod.nodos(conx,lines[i-1])
+  nod.nodosABC(conx,lines[i-1])
   
 
 
 fig.add_subplot(2,1,2)
 
 for i in range(1,7) :
-  a=loadtxt("grafica8-"+str(i)+".dat")
+  a=loadtxt("grafica7-3-"+str(i)+".dat")
   plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
 
 
@@ -58,6 +58,8 @@ xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 
 yticks((0.8,0.7,0.6,0.5),('$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
 ylabel("$P$",fontsize=28)
+
+#axis([0,pi/2,0.5,.8])
 
 #legend(loc='upper left',fontsize=25)
 
