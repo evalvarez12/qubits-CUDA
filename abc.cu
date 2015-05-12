@@ -297,10 +297,34 @@ int main(int argc,char* argv[]) {
   itpp::vec b_one(3); b_one(0)=bx.getValue(); b_one(1)=by.getValue(); b_one(2)=bz.getValue();
   //CAMPO MAGNETICO NO UNIFORME
   itpp::mat b(nqubits,3);
-  for(int i=0;i<nqubits;i++) { 
-    b(i,0)=b_one(0)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
-    b(i,1)=0;
-    b(i,2)=b_one(2)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
+  if (Dbs.getValue() == -1) {
+    //Caso de campo paralelo
+    for(int i=0;i<nqubits;i++) { 
+      b(i,0)=b_one(0);
+      b(i,1)=0;
+      b(i,2)=b_one(2);
+      if (i<xlen) {
+	b(i,0)=0;
+      }
+    }
+  }
+  else if (Dbs.getValue() == -2) {
+    //Caso de campo perpendicular
+    for(int i=0;i<nqubits;i++) { 
+      b(i,0)=b_one(0);
+      b(i,1)=0;
+      b(i,2)=b_one(2);
+      if (i<xlen) {
+	b(i,2)=0;
+      }
+    }
+  }  
+  else {
+    for(int i=0;i<nqubits;i++) { 
+      b(i,0)=b_one(0)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
+      b(i,1)=0;
+      b(i,2)=b_one(2)-Dbs.getValue() + itpp::randu()*2*Dbs.getValue();
+    }
   }
     
   //itpp::cvec state = itppextmath::RandomState(l);

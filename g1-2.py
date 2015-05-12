@@ -15,9 +15,13 @@ import os
   
   
   
-#graficas1-3- para conexionesABC7  
-#graficas1-4- para conexionesABC-2-6  
-#graficas1-5- para conexionesABC-2-4 
+#grafica1-3- para conexionesABC7  
+#grafica1-4- para conexionesABC-2-6  
+#grafica1-5- para conexionesABC-2-4 
+#grafica1-6- para conexionesABC7 con campo perpendicular
+#grafica1-7- para conexionesABC7 con campo paralelo
+#grafica1-8- para conexionesABC-2-6 con campo perpendicular
+#grafica1-9- para conexionesABC-2-6 con campo paralelo
   
 #HACER grafica
 import nodos as nod
