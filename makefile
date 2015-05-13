@@ -2,6 +2,8 @@
 
 LDLIBS = -litpp
 NVCCFLAGS= -arch=sm_13
+GCCBIND = --compiler-bindir /usr/bin/g++-4.8.4 
+
 
 ifeq ($(LOGNAME),eduardo)
   INCLUDES := -I ../libs/
@@ -13,5 +15,5 @@ mein :: mein.cpp
 	g++ $(INCLUDES) $< -o $@ $(LDLIBS)
 
 abc :: abc.cu 
-	nvcc $(INCLUDES) $< -o $@ $(LDLIBS)
+	nvcc $(GCCBIND) $(INCLUDES) $< -o $@ $(LDLIBS)
 	
