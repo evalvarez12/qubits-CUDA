@@ -25,9 +25,13 @@ void itpp2cuda_malloc(itpp::cvec& state,double** dev_R,double** dev_I) {
     R[i]=real(state(i));
     I[i]=imag(state(i));
     }
-  cudaMalloc((void**)&source_R,l*sizeof(double));
-  cudaMalloc((void**)&source_I,l*sizeof(double));
-
+  
+//   cudaMalloc((void**)&source_R,l*sizeof(double));
+//   cudaMalloc((void**)&source_I,l*sizeof(double));
+    
+  cudaSafeCall(cudaMalloc((void**)&source_R,l*sizeof(double)),"malloc",0);
+  cudaSafeCall(cudaMalloc((void**)&source_I,l*sizeof(double)),"malloc",0);
+  
   //cout<<source_R<<" "<<source_I<<endl;
 
   cudaMemcpy(source_R,R,l*sizeof(double),cudaMemcpyHostToDevice);

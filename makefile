@@ -15,5 +15,5 @@ mein :: mein.cpp
 	g++ $(INCLUDES) $< -o $@ $(LDLIBS)
 
 abc :: abc.cu 
-	nvcc $(GCCBIND) $(INCLUDES) $< -o $@ $(LDLIBS)
+	nvcc $(INCLUDES) $< -o $@ $(LDLIBS)
 	
