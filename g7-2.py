@@ -22,7 +22,7 @@ for i in range(1,7) :
 #grafica7-4- campo perpendicular para diferentes topos, conexiones_int
   
   
-##HACER grafica6
+###HACER grafica6
 #import nodos as nod
 #lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
 #jps=linspace(0,pi/2,76)
@@ -41,7 +41,7 @@ for i in range(1,7) :
 #conexionesB=[[[16,0],[2,10]],[[16,1],[2,10]],[[16,3],[2,10]],[[16,4],[2,10]],[[16,5],[2,10]],[[16,2],[2,10]]]
 
 #for i in range(1,7) :
-  #conx=loadtxt("conexionesABC-2-"+str(i)+".txt")
+  #conx=loadtxt("conexiones_int"+str(i)+".txt")
   #conx=conx[1:]
   #fig.add_subplot(4,3,i)
   #nod.nodosABC(conx,lines[i-1])
@@ -51,8 +51,13 @@ for i in range(1,7) :
 #fig.add_subplot(2,1,2)
 
 #for i in range(1,7) :
-  #a=loadtxt("grafica7-3-"+str(i)+".dat")
+  #a=loadtxt("grafica7-4-"+str(i)+".dat")
   #plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
+  
+##i=5
+##a=loadtxt("grafica7-4-"+str(i)+".dat")
+##plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
+  
 
 
 #xlabel("$\gamma$",fontsize=28)
