@@ -18,7 +18,7 @@ import nodos as nod
   
   
 #HACER grafica3
-lines=['o-','<-','p-','v-','*-','^-','D-','h-','>-','H-','d-','x-','s-','+-']
+lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
 labels=['$\gamma=50\lambda$','$\gamma=100\lambda$','$\gamma=300\lambda$','$\gamma=500\lambda$','$\gamma=800\lambda$','$\gamma=1000\lambda$','$\gamma=1400\lambda$']
 jps=linspace(0,pi/2,75)
 a=loadtxt("grafica2.dat")
@@ -37,12 +37,18 @@ fig.add_subplot(2,1,1)
 xticks([])
 yticks([])
 
-fig.add_subplot(2,3,1)
-nod.nodos1('o')
-fig.add_subplot(2,3,2)
-nod.nodos2('v')
-fig.add_subplot(2,3,3)
-nod.nodos3('D')
+fig.add_subplot(4,3,1)
+nod.nodos1(lines[0])
+fig.add_subplot(4,3,2)
+nod.nodos2(lines[1])
+fig.add_subplot(4,3,3)
+nod.nodos3(lines[2])
+fig.add_subplot(4,3,4)
+nod.nodos4(lines[3])
+fig.add_subplot(4,3,5)
+nod.nodos5(lines[4])
+fig.add_subplot(4,3,6)
+nod.nodos6(lines[5])
 
 
 fig.add_subplot(2,1,2)
