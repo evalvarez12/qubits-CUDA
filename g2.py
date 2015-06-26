@@ -1,23 +1,36 @@
 from pylab import *
 import os
-import nodos as nod
+
 
 
 #OBTENER DATOS
 
 #dat_i=".dat"
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open --Jc 0.01 --Jp 1. --Js 1. --DJs 0.2 --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2"
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op1 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-1-1-"
 #os.system(comando + dat_i)
 
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open --Jc 0.01 --Jp 1. --Js 1. --DJs 0.2 --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-5"
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op2 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-1-2-"
 #os.system(comando + dat_i)
 
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op3 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-1-3-"
+#os.system(comando + dat_i)
 
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open --Jc 0.01 --Jp 1. --Js 1. --DJs 0.2 --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-6"
-#os.system(comando + dat_i)  
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op4 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-1-4-"
+#os.system(comando + dat_i)
+
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op5 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-1-5-"
+#os.system(comando + dat_i)
+
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op6 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-1-6-"
+#os.system(comando + dat_i)
+  
+  
+# DATOS
+#grafica2-1- para semicadena rara variando conexiones internas
   
   
 #HACER grafica3
+import nodos as nod
 lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
 labels=['$\gamma=50\lambda$','$\gamma=100\lambda$','$\gamma=300\lambda$','$\gamma=500\lambda$','$\gamma=800\lambda$','$\gamma=1000\lambda$','$\gamma=1400\lambda$']
 jps=linspace(0,pi/2,75)
@@ -53,19 +66,21 @@ nod.nodos6(lines[5])
 
 fig.add_subplot(2,1,2)
 
-plot(jps,a,'o-',label='$A$')
-plot(jps,op1,'v-',label='$B$')
-plot(jps,op2,'D-',label='$C$')
+jps=linspace(0,pi/2,76)
+for i in range(1,7) :
+  a=loadtxt("grafica2-1-"+str(i)+"-.dat")
+  plot(jps,a,lines[i-1],markevery=1)
 
   
 
 xlabel("$\gamma$",fontsize=28)
-xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
+xticks(arange(0,pi/4+.1,pi/2),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 
 
 yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
 ylabel("$P$",fontsize=28)
 
+axis([0,pi/2.,0.5,.95])
 #legend(loc='lower center',fontsize=25)
 
 tick_params(axis='both',          # changes apply to the x-axis
