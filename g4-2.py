@@ -20,7 +20,7 @@ import conexiones as conx
 lines=['o-','<-','p-','v-','+-','^-','h-','D-','>-','H-','d-','s-','x-','*-']
 
 
-for i in range(2,15,2) :
+for i in [4,8,12,14] :
   a=loadtxt("grafica4-2-pt-"+str(i)+".dat")
   plot(a,lines[i-1],markevery=60,label=r"$\nu="+str(i)+"$")
   
@@ -51,14 +51,15 @@ tick_params(axis='both',          # changes apply to the x-axis
 ax = axes([.55, .65, .33, .22])
 jps=linspace(0,pi/2,75)
 
-for i in range(2,15,2) :
+for i in [4,8,12,14] :
   ains=loadtxt("grafica4-"+str(i)+".dat")
-  plot(jps,ains,lines[i-1])
-  xticks((0,pi/8,pi/4),('$0$','$\pi/8$','$\pi/4$'),fontsize=25)
+  jps2=jps/sqrt(i)
+  plot(jps2,ains,lines[i-1])
+  xticks((0,pi/16,pi/8),('$0$','$\pi/16$','$\pi/8$'),fontsize=25)
   yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
-  setp(ax, xlim=(0,pi/4))
+  setp(ax, xlim=(0,pi/8))
   
 
-xlabel("$\gamma$",fontsize=28)
+xlabel("$\gamma^{\prime}$",fontsize=28)
 ylabel("$P$",fontsize=28)
 show()

@@ -204,7 +204,7 @@ def nodos1(label) :
   for j in range(6,15) :
     G.add_edge(j,j+1,weight=4)
       
-  G.add_edge(0,16,weight=1)
+  G.add_edge(2,16,weight=1)
   
   
   G.add_edge(2,10,weight=1)
@@ -257,7 +257,7 @@ def nodos2(label) :
   for j in range(6,15) :
     G.add_edge(j,j+1,weight=4)
       
-  G.add_edge(0,16,weight=1)
+  G.add_edge(2,16,weight=1)
   
   
   G.add_edge(2,10,weight=1)
@@ -315,7 +315,7 @@ def nodos3(label) :
   for j in range(6,15) :
     G.add_edge(j,j+1,weight=4)
       
-  G.add_edge(0,16,weight=1)
+  G.add_edge(2,16,weight=1)
   
   
   G.add_edge(2,10,weight=1)
@@ -370,7 +370,7 @@ def nodos4(label) :
   for j in range(6,15) :
     G.add_edge(j,j+1,weight=4)
       
-  G.add_edge(0,16,weight=1)
+  G.add_edge(2,16,weight=1)
   
   
   G.add_edge(2,10,weight=1)
@@ -427,7 +427,7 @@ def nodos5(label) :
   for j in range(6,15) :
     G.add_edge(j,j+1,weight=4)
       
-  G.add_edge(0,16,weight=1)
+  G.add_edge(2,16,weight=1)
   
   
   G.add_edge(2,10,weight=1)
@@ -482,7 +482,7 @@ def nodos6(label) :
   for j in range(6,15) :
     G.add_edge(j,j+1,weight=4)
       
-  G.add_edge(0,16,weight=1)
+  G.add_edge(2,16,weight=1)
   
   
   G.add_edge(2,10,weight=1)
