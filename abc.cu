@@ -100,7 +100,23 @@ int main(int argc,char* argv[]) {
   if(model=="model3_open_op2") {
     evolution=extra_model::model3_open_op2;
     nqubits_env=nqubits-1;
+  }
+  if(model=="model3_open_op3") {
+    evolution=extra_model::model3_open_op3;
+    nqubits_env=nqubits-1;
   }  
+  if(model=="model3_open_op4") {
+    evolution=extra_model::model3_open_op4;
+    nqubits_env=nqubits-1;
+  }  
+  if(model=="model3_open_op5") {
+    evolution=extra_model::model3_open_op5;
+    nqubits_env=nqubits-1;
+  }  
+  if(model=="model3_open_op6") {
+    evolution=extra_model::model3_open_op6;
+    nqubits_env=nqubits-1;
+  }    
   if(model=="model4") {
     evolution=model::model4;
     nqubits_env=nqubits-1;
