@@ -454,10 +454,10 @@ int main(int argc,char* argv[]) {
   if(option=="get_spectra") {
     itpp::cmat U;
     if(symr.getValue()==0) {
-      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,conxA,conxB);
+      U = evmath::evolution_matrix_chain_reflection(J,b.get_row(0),nqubits,1);
     }
     else { 
-      U = evmath::evolution_matrix(evolution,js,J,Jp,b,nqubits,xlen,conxA,conxB);
+      U = evmath::evolution_matrix_chain_translation(J,b.get_row(0),nqubits,1);
     }
     int rcont = U.rows();
     itpp::cvec eigenvalues(rcont);
