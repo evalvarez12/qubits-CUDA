@@ -138,7 +138,7 @@ void lattice(double *dev_R, double *dev_I, double j, itpp::vec b , int nqubits, 
   int l=pow(2,nqubits);
   int i_hor,i_ver;
   choosenumblocks(l,numthreads,numblocks);
-  set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
+  set_parameters(b,kcos,ksin,bx,by,bz);
   for(int i=0;i<nqubits-1;i++) {
     i_hor=(i+1)%xlen+(i/xlen)*xlen;
     i_ver=(i+xlen)%nqubits;

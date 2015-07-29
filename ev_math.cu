@@ -103,7 +103,7 @@ itpp::cmat evolution_matrix_chain_translation(double j, itpp::vec b ,  int nqubi
   itpp::cmat Umat(rcont,rcont);
   for(int i=0;i<rcont;i++) {
     to_zero<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,l); 
-    special_chain_proyector<<<1,1>>>(dev_umatR,dev_umatI,nqubits,kx,S[i]);
+    special_chain_proyector<<<1,1>>>(dev_umatR,dev_umatI,nqubits,l,kx,S[i]);
     times_norm<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,l); 
   
     model::chain(dev_umatR,dev_umatI,j,b,nqubits);
