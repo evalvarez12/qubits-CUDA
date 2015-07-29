@@ -83,7 +83,7 @@ void model2(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itp
   }
   
   
-void chain(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra,itpp::ivec conA, itpp::ivec conB){ 
+void chain(double *dev_R, double *dev_I, double j,  itpp::vec b , int nqubits){ 
   /*    MODEL CHAIN CLOSED
              *
            *   * 
@@ -95,18 +95,18 @@ void chain(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp
   double kcos,ksin,bx,by,bz;
   int l=pow(2,nqubits);
   choosenumblocks(l,numthreads,numblocks);
+  set_parameters(b,kcos,ksin,bx,by,bz);
   for(int i=0;i<nqubits;i++) {
-    Ui_kernel<<<numblocks,numthreads>>>(i,(i+1)%(nqubits),dev_R,dev_I,cos(js(i)),sin(js(i)),l);
+    Ui_kernel<<<numblocks,numthreads>>>(i,(i+1)%(nqubits),dev_R,dev_I,cos(j),sin(j),l);
     }
-  for(int i=0;i<nqubits;i++) {
-    set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
+  for(int i=0;i<nqubits;i++) {  
     Uk_kernel<<<numblocks,numthreads>>>(i,dev_R,dev_I,bx,by,bz,kcos,ksin,l);     
     }
   return;  
   }  
   
   
-void chain_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra,itpp::ivec conA, itpp::ivec conB){ 
+void chain_open(double *dev_R, double *dev_I, double j, itpp::vec b, int nqubits){ 
   /*    MODEL CHAIN OPEN
 
     *  *  *  *  *  *  *  *  *  
@@ -115,17 +115,17 @@ void chain_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp,
   double kcos,ksin,bx,by,bz;
   int l=pow(2,nqubits);
   choosenumblocks(l,numthreads,numblocks);
+  set_parameters(b,kcos,ksin,bx,by,bz);
   for(int i=0;i<nqubits-1;i++) {
-    Ui_kernel<<<numblocks,numthreads>>>(i,i+1,dev_R,dev_I,cos(js(i)),sin(js(i)),l);
+    Ui_kernel<<<numblocks,numthreads>>>(i,i+1,dev_R,dev_I,cos(j),sin(j),l);
     }
   for(int i=0;i<nqubits;i++) {
-    set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
     Uk_kernel<<<numblocks,numthreads>>>(i,dev_R,dev_I,bx,by,bz,kcos,ksin,l);     
     }
   return;  
   }
   
-void lattice(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int xlen,itpp::ivec conA, itpp::ivec conB){ 
+void lattice(double *dev_R, double *dev_I, double j, itpp::vec b , int nqubits, int xlen){ 
   /*    MODEL LATTICE
        
        *   *   *   *
@@ -138,14 +138,14 @@ void lattice(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, it
   int l=pow(2,nqubits);
   int i_hor,i_ver;
   choosenumblocks(l,numthreads,numblocks);
+  set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
   for(int i=0;i<nqubits-1;i++) {
     i_hor=(i+1)%xlen+(i/xlen)*xlen;
     i_ver=(i+xlen)%nqubits;
-    Ui_kernel<<<numblocks,numthreads>>>(i,i_hor,dev_R,dev_I,cos(js(i)),sin(js(i)),l);
-    Ui_kernel<<<numblocks,numthreads>>>(i,i_ver,dev_R,dev_I,cos(js(i)),sin(js(i)),l);
+    Ui_kernel<<<numblocks,numthreads>>>(i,i_hor,dev_R,dev_I,cos(j),sin(j),l);
+    Ui_kernel<<<numblocks,numthreads>>>(i,i_ver,dev_R,dev_I,cos(j),sin(j),l);
     }
   for(int i=0;i<nqubits;i++) {
-    set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
     Uk_kernel<<<numblocks,numthreads>>>(i,dev_R,dev_I,bx,by,bz,kcos,ksin,l);     
     }
   return;  

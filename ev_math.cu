@@ -23,7 +23,7 @@ itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j
   return Umat;
 }
 
-itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j, double jp, itpp::mat b ,  int nqubits, int extra, itpp::ivec A, itpp::ivec B, int symr)  { 
+itpp::cmat evolution_matrix_chain_reflection(double j, itpp::vec b ,  int nqubits, int symr)  { 
   //SECTORES DE SIMETRIA POR REFLEXION
   int l = pow(2,nqubits);
   double *dev_umatR,*dev_umatI;
@@ -58,10 +58,58 @@ itpp::cmat evolution_matrix(operador_evolucion evolucion, itpp::vec js, double j
     reflection_proyector<<<1,1>>>(dev_umatR,dev_umatI,nqubits,symr,S[i]);
     times_norm<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,l); 
   
-    evolucion(dev_umatR,dev_umatI,js,j,jp,b,nqubits,extra,A,B);
+    model::chain_open(dev_umatR,dev_umatI,j,b,nqubits);
    
     to_zero<<<numblocks,numthreads>>>(dev_dotR,dev_dotI,rcont); 
     proyected_dot_reflection<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,dev_dotR,dev_dotI,nqubits,rcont,symr,dev_S);
+    evcuda::cuda2itpp(state,dev_dotR,dev_dotI);
+    
+    Umat.set_col(i,state);
+  }
+  cudaFree(dev_umatR);
+  cudaFree(dev_umatI);
+  return Umat;
+}
+
+itpp::cmat evolution_matrix_chain_translation(double j, itpp::vec b ,  int nqubits, int kx)  { 
+  //SECTORES DE SIMETRIA POR REFLEXION
+  int l = pow(2,nqubits);
+  double *dev_umatR,*dev_umatI;
+  evcuda::cmalloc(&dev_umatR,&dev_umatI,l);
+  
+  int *S=new int[l];
+  for(int m=0;m<l;m++) {
+    S[m]=2;
+  }
+  find_states_total_horizontal(S,nqubits,kx,l);
+  int rcont=0;
+  
+  for(int i=0;i<l;i++) {
+    if(S[i]==1) {
+      S[rcont]=i;
+      rcont++;
+    }
+  }
+  
+  int *dev_S;
+  cudaMalloc((void**)&dev_S,rcont*sizeof(int)); 
+  cudaMemcpy(dev_S,S,rcont*sizeof(int),cudaMemcpyHostToDevice);
+  double *dev_dotR,*dev_dotI;
+  evcuda::cmalloc(&dev_dotR,&dev_dotI,rcont);
+  int numthreads, numblocks;
+  choosenumblocks(l,numthreads,numblocks);
+  
+  itpp::cvec state(rcont);
+  itpp::cmat Umat(rcont,rcont);
+  for(int i=0;i<rcont;i++) {
+    to_zero<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,l); 
+    special_chain_proyector<<<1,1>>>(dev_umatR,dev_umatI,nqubits,kx,S[i]);
+    times_norm<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,l); 
+  
+    model::chain(dev_umatR,dev_umatI,j,b,nqubits);
+   
+    to_zero<<<numblocks,numthreads>>>(dev_dotR,dev_dotI,rcont); 
+    proyected_dot_chain<<<numblocks,numthreads>>>(dev_umatR,dev_umatI,dev_dotR,dev_dotI,nqubits,rcont,kx,dev_S);
     evcuda::cuda2itpp(state,dev_dotR,dev_dotI);
     
     Umat.set_col(i,state);

@@ -77,14 +77,6 @@ int main(int argc,char* argv[]) {
     evolution=model::model2;
     nqubits_env=nqubits-1;
   }
-  if(model=="chain") {
-    evolution=model::chain;
-    nqubits_env=nqubits;
-  }
-  if(model=="chain_open") {
-    evolution=model::chain_open;
-    nqubits_env=nqubits;
-  }
   if(model=="model3") {
     evolution=model::model3;
     nqubits_env=nqubits-1;
