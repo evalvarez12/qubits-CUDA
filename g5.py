@@ -33,8 +33,8 @@ nu="\mu"
 #dims=[[6,10],[7,12],[8,14],[10,14]]
 dims=[[5,11],[4,12],[3,13],[2,14],[1,15]]
 
-for i in range(1,6) :
-  a=loadtxt("grafica5-3-"+str(i)+".dat")
+for i in range(1,5) :
+  a=loadtxt("grafica5-2-"+str(i)+".dat")
   plot(jps,a,lines[i-1],label="$N_e="+str(dims[i-1][0])+"$ $N_{e^\prime}="+str(dims[i-1][1])+"$")
 
 
@@ -44,6 +44,8 @@ xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 
 yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
 ylabel("$P$",fontsize=28)
+
+axis([0,pi/2.,0.5,.8])
 
 legend(loc='lower center',fontsize=25)
 

@@ -19,7 +19,7 @@ import nodos as nod
   
   
 #HACER grafica6
-lines=['o-','<-','p-','v-','*-','^-','h-','D-','>-','H-','d-','x-','s-','+-','D-','v-']
+lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
 jps=linspace(0,pi/2,76)
 nu="\mu"
 labels=['A','B','C','D','E','F']
@@ -53,6 +53,7 @@ xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
 ylabel("$P$",fontsize=28)
 
+axis([0,pi/2.,0.5,.9])
 #legend(loc='upper left',fontsize=25)
 
 tick_params(axis='both',          # changes apply to the x-axis
