@@ -74,7 +74,8 @@ for i in range(1,7) :
   
 
 xlabel("$\gamma$",fontsize=28)
-xticks(arange(0,pi/4+.1,pi/2),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
+
+xticks((0,pi/4+.1,pi/2),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 
 
 yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
