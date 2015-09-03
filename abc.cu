@@ -380,6 +380,7 @@ int main(int argc,char* argv[]) {
       for(int it=0;it<numt;it++) {
         evolution(dev_R,dev_I,js,J,Jpi,b,nqubits,xlen,conxA,conxB);
       }
+      cudaCheckError("valio verga",383);
       evcuda::cuda2itpp(state,dev_R,dev_I);
       cout<<std::real(evmath::purity_last_qubit(state,l))<<endl;
     }

@@ -533,20 +533,8 @@ void modelVar14(double *dev_R, double *dev_I, itpp::vec js, double j, double jp,
     Ui_kernel<<<numblocks,numthreads>>>(i+xlen,i+1+xlen,dev_R,dev_I,cos(js(i)),sin(js(i)),l);
     }
   //la interaccion variable  A B  
-  Ui_kernel<<<numblocks,numthreads>>>(0,7,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(0,6,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(1,13,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(1,12,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(1,14,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(1,11,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(2,9,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(2,7,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(2,6,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(3,13,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(3,12,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(4,15,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(4,7,dev_R,dev_I,cos(jp),sin(jp),l);
-  Ui_kernel<<<numblocks,numthreads>>>(5,12,dev_R,dev_I,cos(jp),sin(jp),l);
+  Ui_kernel<<<numblocks,numthreads>>>(2,10,dev_R,dev_I,cos(jp),sin(jp),l);
+
   //se hace la interacion 0 con A
   Ui_kernel<<<numblocks,numthreads>>>(nqubits-1,2,dev_R,dev_I,cos(j),sin(j),l);
   //evolucion patada magnetica

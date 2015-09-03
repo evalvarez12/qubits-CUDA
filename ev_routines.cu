@@ -8,7 +8,7 @@ namespace evcuda{
 void cmalloc(double** dev_R,double** dev_I,int l) {
   double *source_R;
   double *source_I;
-  cudaMalloc((void**)&source_R,l*sizeof(double));
+  cudaSafeCall(cudaMalloc((void**)&source_R,l*sizeof(double)),"malloc",0);
   cudaMalloc((void**)&source_I,l*sizeof(double));
   *dev_R=source_R;
   *dev_I=source_I;
@@ -34,7 +34,7 @@ void itpp2cuda_malloc(itpp::cvec& state,double** dev_R,double** dev_I) {
   
   //cout<<source_R<<" "<<source_I<<endl;
 
-  cudaMemcpy(source_R,R,l*sizeof(double),cudaMemcpyHostToDevice);
+  cudaSafeCall(cudaMemcpy(source_R,R,l*sizeof(double),cudaMemcpyHostToDevice),"copy",1);
   cudaMemcpy(source_I,I,l*sizeof(double),cudaMemcpyHostToDevice);
 
   //cout<<dev_R<<" "<<dev_I<<endl;
