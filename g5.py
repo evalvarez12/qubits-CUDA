@@ -35,7 +35,6 @@ lines=['o-','<-','p-','v-','*-','^-','h-','D-','>-','H-','d-','x-','s-','+-']
 jps=linspace(0,pi/2,76)
 nu="\mu"
 
-<<<<<<< HEAD
 
 
 fig=figure()
@@ -56,10 +55,6 @@ fig.add_subplot(2,2,1)
 dims=[[6,10],[6,12],[6,15]]
 for i in range(1,4) :
   a=loadtxt("grafica5-4-"+str(i)+".dat")
-=======
-for i in range(1,5) :
-  a=loadtxt("grafica5-2-"+str(i)+".dat")
->>>>>>> 0b552a37b323600d6498f7a3ef67c47ac8ce9473
   plot(jps,a,lines[i-1],label="$N_e="+str(dims[i-1][0])+"$ $N_{e^\prime}="+str(dims[i-1][1])+"$")
 
 
@@ -69,16 +64,10 @@ xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
 
 yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
 
-<<<<<<< HEAD
 
 #axis([0,pi/2,.5,.8])
 
 #legend(loc='lower center',fontsize=25)
-=======
-axis([0,pi/2.,0.5,.8])
-
-legend(loc='lower center',fontsize=25)
->>>>>>> 0b552a37b323600d6498f7a3ef67c47ac8ce9473
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
