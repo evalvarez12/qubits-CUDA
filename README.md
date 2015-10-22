@@ -9,3 +9,5 @@ Plus some routines for evolving Ising spin systems, QFT and obtaining reduced de
 Requires C++ libraries it++ and tclap.
 
 For any questions contact evalvarez12@gmail.com
+
+For the development of this toolkit we acknowledge support from the grants UNAM-PAPIIT IN111015.
