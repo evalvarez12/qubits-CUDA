@@ -110,7 +110,7 @@ tick_params(axis='both',          # changes apply to the x-axis
 fig.add_subplot(2,1,2)
 
 
-dims=[[6,10],[7,12],[8,14],[10,14]]
+dims=[[6,10],[8,12],[10,14]]
 for i in range(1,4) :
   a=loadtxt("grafica5-6-"+str(i)+".dat")
   plot(jps,a,lines[i-1],label="$N_e="+str(dims[i-1][0])+"$ $N_{e^\prime}="+str(dims[i-1][1])+"$")
