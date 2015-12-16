@@ -25,7 +25,7 @@ import os
 #os.system(comando + dat_i)
   
   
-#DATOS
+# DATOS
 #grafica2-1- para semicadena rara variando conexiones internas
 #grafica2-3- como 2-2 pero para 2PI
   
@@ -44,7 +44,7 @@ op1=op1[:-1]
 op2=op2[:-1]
 
 
-fig=figure(figsize=(9, 9))
+fig=figure(figsize=(14, 9))
 
 fig.add_subplot(2,1,1)
 
@@ -67,22 +67,22 @@ nod.nodos6(lines[5])
 
 fig.add_subplot(2,1,2)
 
-jps=linspace(0,pi/2,76)
+jps=linspace(0,2*pi,151)
 for i in range(1,7) :
-  a=loadtxt("grafica2-2-"+str(i)+"-.dat")
+  a=loadtxt("grafica2-3-"+str(i)+"-.dat")
   plot(jps,a,lines[i-1],markevery=1)
 
   
 
 xlabel("$\gamma$",fontsize=28)
 
-xticks((0,pi/4,pi/2),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
+xticks((0,pi/2,pi,(3/2.)*pi,2*pi),('$0$','$\pi/2$','$\pi$','$3/2\pi$','$2\pi$'),fontsize=25)
 
 
 yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
 ylabel("$P$",fontsize=28)
 
-axis([0,pi/2.,0.5,.85])
+axis([0,2*pi,0.5,.85])
 #legend(loc='lower center',fontsize=25)
 
 tick_params(axis='both',          # changes apply to the x-axis

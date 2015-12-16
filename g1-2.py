@@ -40,40 +40,37 @@ import os
   
 #HACER grafica
 import nodos as nod
-<<<<<<< HEAD
 
 
+fig=figure(figsize=(9, 6)) # in inches!
 
 
-
-conx=loadtxt("conexionesABC-2-6.txt")
+conx=loadtxt("conexionesABC7.txt")
 conx=conx[1:]
-lines=['o-','<-','p-','v-','*-','^-','D-','h-','>-','H-','d-','x-','s-','+-']
+lines=['s-','<-','p-','v-','D-','H-','D-','h-','>-','H-','d-','x-','s-','+-']
 labels=['$\gamma=5\lambda$','$\gamma=10\lambda$','$\gamma=30\lambda$','$\gamma=50\lambda$','$\gamma=80\lambda$','$\gamma=100\lambda$','$\gamma=140\lambda$']
+
+
+#for i in range(1,7) :
+  #a=loadtxt("grafica1-3-"+str(i)+".dat")
+
+#labels=['$N_e=6$','$N_e=9$','$N_e=12$','$N_e=15$','$\gamma=0.5$','$\gamma=1.$','$\gamma=140$']
 for i in range(1,7) :
-  a=loadtxt("grafica1-8-"+str(i)+".dat")
-=======
-conx=loadtxt("conexiones_int3.txt")
-conx=conx[1:]
-lines=['o-','<-','p-','v-','*-','^-','D-','h-','>-','H-','d-','x-','s-','+-']
-#labels=['$\gamma=5\lambda$','$\gamma=10\lambda$','$\gamma=30\lambda$','$\gamma=50\lambda$','$\gamma=80\lambda$','$\gamma=100\lambda$','$\gamma=140\lambda$']
-
-labels=['$N_e=6$','$N_e=9$','$N_e=12$','$N_e=15$','$\gamma=0.5$','$\gamma=1.$','$\gamma=140$']
-for i in range(1,5) :
-  a=loadtxt("grafica1-13-"+str(i)+".dat")
->>>>>>> 8f15256d3c01a1387b57a9d5aae3f132a7560b53
-  plot(a,lines[i],markevery=60,label=labels[i-1])
+  a=loadtxt("grafica1-3-"+str(i)+".dat")
+  plot(a,lines[i],markevery=60,label=labels[i-1],markersize=10)
 
 
-xlabel("$t$",fontsize=28)
+xlabel("$t$",fontsize=17)
 #xticks(log(arange(0.000001,.1+.001,.05)),('$0$','$0.05$','$0.1$'),fontsize=15)
-xticks((500,1000,1500,2000,2500),('$500$','$1000$','$1500$','$2000$','$2500$'),fontsize=25)
-yticks((1,0.9,0.8,0.7,0.6,0.5),('$1$','$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
-ylabel("$P$",fontsize=28)
-text(2000,0.7,'$b \perp J$',fontsize=28)
-text(1000,0.7,'$\lambda=0.2$',fontsize=28)
+xticks((500,1000,1500,2000,2500),('$500$','$1000$','$1500$','$2000$','$2500$'),fontsize=17)
+yticks((1,0.9,0.8,0.7,0.6,0.5),('$1$','$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=17)
+ylabel("$P$",fontsize=17)
+#text(2000,0.7,'$b \perp J$',fontsize=28)
+#text(1000,0.7,'$\lambda=0.2$',fontsize=28)
 
-legend(loc='upper left',fontsize=25)
+axis([0,2500.,0.48,1])
+
+legend(loc='upper right',fontsize=17)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -83,8 +80,8 @@ tick_params(axis='both',          # changes apply to the x-axis
     length=10)
 
 #INSET
-#ax = axes([.55, .65, .33, .22])
+ax = axes([.28, .65, .43, .22])
 #ax = axes([.55, .1, .33, .22])
-#nod.nodosABC(conx,'-')
+nod.nodosABC_lamb_gamma_labels(conx,'-')
 
-show()
+savefig('art-g1-3.png')

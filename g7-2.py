@@ -9,36 +9,26 @@ import conexiones as conx
 # b g r c p y
 
 #OBTENER DATOS
-<<<<<<< HEAD
+
 #for i in range(1,7) :
   #os.system("cp conexiones_int"+str(i)+".txt conexiones.txt " )
   #dat_i=str(i)+".dat"
   #comando = "./abc -o purity_gamma -q 17 --x 6 --model modelConexRandABC --Jc 0.01 --Jp 1 --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs -2 --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 9678  > grafica7-4-"
   #os.system(comando + dat_i)
   #print i
-=======
-for i in range(1,7) :
-  os.system("cp conexiones_int"+str(i)+".txt conexiones.txt " )
-  dat_i=str(i)+".dat"
-  comando = "./abc -o purity_gamma -q 17 --x 6 --model modelConexRandABC --Jc 0.01 --Jp 1 --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs -2 --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 9678  > grafica7-4-"
-  os.system(comando + dat_i)
-  print i
->>>>>>> 8f15256d3c01a1387b57a9d5aae3f132a7560b53
+#for i in range(1,7) :
+  #os.system("cp conexiones_int"+str(i)+".txt conexiones.txt " )
+  #dat_i=str(i)+".dat"
+  #comando = "./abc -o purity_gamma -q 17 --x 6 --model modelConexRandABC --Jc 0.01 --Jp 1 --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs -2 --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 9678  > grafica7-4-"
+  #os.system(comando + dat_i)
+  #print i
+
 
 
   
   
 #grafica7-4- campo perpendicular para diferentes topos, conexiones_int
-<<<<<<< HEAD
-  
-  
-##HACER grafica6
-import nodos as nod
-lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
-jps=linspace(0,pi/2,76)
-nu="\mu"
-labels=['A','B','C','D','E','F']
-=======
+#<<<<<<< HEAD
   
   
 ###HACER grafica6
@@ -47,7 +37,15 @@ labels=['A','B','C','D','E','F']
 #jps=linspace(0,pi/2,76)
 #nu="\mu"
 #labels=['A','B','C','D','E','F']
->>>>>>> 8f15256d3c01a1387b57a9d5aae3f132a7560b53
+#=======
+  
+  
+###HACER grafica6
+#import nodos as nod
+#lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
+#jps=linspace(0,pi/2,76)
+#nu="\mu"
+#labels=['A','B','C','D','E','F']
 
 #fig=figure()
 
@@ -72,17 +70,17 @@ for i in range(1,7) :
   #conx=conx[1:]
   #fig.add_subplot(4,3,i)
   #nod.nodosABC(conx,lines[i-1])
->>>>>>> 8f15256d3c01a1387b57a9d5aae3f132a7560b53
+
   
 
 
 #fig.add_subplot(2,1,2)
 
-<<<<<<< HEAD
+
 for i in range(1,7) :
   a=loadtxt("grafica7-4-"+str(i)+".dat")
   plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
-=======
+
 #for i in range(1,7) :
   #a=loadtxt("grafica7-4-"+str(i)+".dat")
   #plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
@@ -91,7 +89,7 @@ for i in range(1,7) :
 ##a=loadtxt("grafica7-4-"+str(i)+".dat")
 ##plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
   
->>>>>>> 8f15256d3c01a1387b57a9d5aae3f132a7560b53
+
 
 
 #xlabel("$\gamma$",fontsize=28)
