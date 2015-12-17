@@ -38,15 +38,16 @@ import conexiones as conx
   
   
 #HACER grafica6
-lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
+fig=figure(figsize=(14, 9))
+lines=['bs-','g<-','rp-','cv-','mD-','yH-','D-','h-','>-','H-','d-','x-','s-','+-']
 jps=linspace(0,pi/2,76)
 nu="\mu"
 labels=['A','B','C','D','E','F']
 
-fig=figure()
 
-ylabel("$P$ \n",fontsize=30)
-xlabel("\n $\gamma$",fontsize=30)
+
+ylabel("$P$ \n",fontsize=19)
+xlabel("\n $\gamma$",fontsize=19)
 xticks([])
 yticks([])
 
@@ -54,19 +55,19 @@ fig.add_subplot(2,2,1)
 
 for i in range(1,7) :
   a=loadtxt("grafica6-c4-"+str(i)+".dat")
-  plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
+  plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$",markersize=12,markevery=2)
 
 
 
-xticks(arange(0,pi/2+.1,pi/4),('','',''),fontsize=25)
+xticks(arange(0,pi/2+.1,pi/4),('','',''),fontsize=19)
 
 
-yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$ \n $0.9$'),fontsize=25)
+yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$ \n $0.9$'),fontsize=19)
 
 axis([0,pi/2.,0.5,.9])
 
 
-text(pi/4-.2,0.6,r'$\nu=4$',fontsize=28)
+text(pi/4-.2,0.6,r'$\nu=4$',fontsize=19)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -79,19 +80,19 @@ fig.add_subplot(2,2,2)
 
 for i in range(1,7) :
   a=loadtxt("grafica6-c8-"+str(i)+".dat")
-  plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
+  plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$",markersize=12,markevery=2)
 
 
 
-xticks(arange(0,pi/2+.1,pi/4),('','',''),fontsize=25)
+xticks(arange(0,pi/2+.1,pi/4),('','',''),fontsize=17)
 
 
-yticks((0.9,0.8,0.7,0.6,0.5),('','','','',''),fontsize=25)
+yticks((0.9,0.8,0.7,0.6,0.5),('','','','',''),fontsize=19)
 
 axis([0,pi/2.,0.5,.9])
 
 
-text(pi/4-.2,0.6,r'$\nu=8$',fontsize=28)
+text(pi/4-.2,0.6,r'$\nu=8$',fontsize=19)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -105,19 +106,19 @@ fig.add_subplot(2,2,3)
 
 for i in range(1,7) :
   a=loadtxt("grafica6-c12-"+str(i)+".dat")
-  plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
+  plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$",markersize=12,markevery=2)
 
 
 
-xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$ $0$'),fontsize=25)
+xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$ $0$'),fontsize=19)
 
 
-yticks((0.9,0.8,0.7,0.6,0.5),('','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
+yticks((0.9,0.8,0.7,0.6,0.5),('','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=19)
 
 axis([0,pi/2.,0.5,.9])
 
 
-text(pi/4-.2,0.6,r'$\nu=12$',fontsize=28)
+text(pi/4-.2,0.6,r'$\nu=12$',fontsize=19)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -131,18 +132,18 @@ fig.add_subplot(2,2,4)
 
 for i in range(1,7) :
   a=loadtxt("grafica6-c16-"+str(i)+".dat")
-  plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$")
+  plot(jps,a,lines[i-1],label="$"+labels[i-1]+"$",markersize=12,markevery=2)
 
 
 
-xticks(arange(0,pi/2+.1,pi/4),('','$\pi/4$','$\pi/2$'),fontsize=25)
+xticks(arange(0,pi/2+.1,pi/4),('','$\pi/4$','$\pi/2$'),fontsize=19)
 
 
-yticks((0.9,0.8,0.7,0.6,0.5),('','','','',''),fontsize=25)
+yticks((0.9,0.8,0.7,0.6,0.5),('','','','',''),fontsize=19)
 
 axis([0,pi/2.,0.5,.9])
 
-text(pi/4-.2,0.6,r'$\nu=16$',fontsize=28)
+text(pi/4-.2,0.6,r'$\nu=16$',fontsize=19)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -157,4 +158,4 @@ tick_params(axis='both',          # changes apply to the x-axis
 
 
 fig.subplots_adjust(hspace=0,wspace=0)
-show()
+savefig('art-g4-6.png')

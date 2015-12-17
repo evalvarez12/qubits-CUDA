@@ -17,12 +17,14 @@ import conexiones as conx
   
   
 #HACER grafica3
+fig=figure(figsize=(9, 6)) # in inches!
+
 lines=['o-','<-','p-','v-','+-','^-','h-','D-','>-','H-','d-','s-','x-','*-']
 
 
 for i in [4,8,12,14] :
   a=loadtxt("grafica4-2-pt-"+str(i)+".dat")
-  plot(a,lines[i-1],markevery=60,label=r"$\nu="+str(i)+"$")
+  plot(a,lines[i-1],markevery=60,label=r"$\nu="+str(i)+"$",markersize=10)
   
   
   
@@ -30,13 +32,13 @@ for i in [4,8,12,14] :
 
 
 
-xlabel("$t$",fontsize=28)
+xlabel("$t$",fontsize=17)
 #xticks(log(arange(0.000001,.1+.001,.05)),('$0$','$0.05$','$0.1$'),fontsize=15)
-xticks((500,1000,1500,2000,2500),('$500$','$1000$','$1500$','$2000$','$2500$'),fontsize=25)
-yticks((1,0.9,0.8,0.7,0.6,0.5),('$1$','$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
+xticks((500,1000,1500,2000,2500),('$500$','$1000$','$1500$','$2000$','$2500$'),fontsize=17)
+yticks((1,0.9,0.8,0.7,0.6,0.5),('$1$','$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=17)
 ylabel("$P$",fontsize=28)
 
-legend(loc='lower left',fontsize=25)
+legend(loc='lower left',fontsize=17)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -55,11 +57,11 @@ for i in [4,8,12,14] :
   ains=loadtxt("grafica4-"+str(i)+".dat")
   jps2=jps/sqrt(i)
   plot(jps2,ains,lines[i-1])
-  xticks((0,pi/16,pi/8),('$0$','$\pi/16$','$\pi/8$'),fontsize=25)
-  yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
+  xticks((0,pi/16,pi/8),('$0$','$\pi/16$','$\pi/8$'),fontsize=17)
+  yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=17)
   setp(ax, xlim=(0,pi/8))
   
 
-xlabel("$\gamma^{\prime}$",fontsize=28)
-ylabel("$P$",fontsize=28)
-show()
+xlabel("$\gamma^{\prime}$",fontsize=17)
+ylabel("$P$",fontsize=17)
+savefig('art-g4-4.png')

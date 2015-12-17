@@ -70,17 +70,17 @@ fig.add_subplot(2,1,2)
 jps=linspace(0,pi/2,76)
 for i in range(1,7) :
   a=loadtxt("grafica2-2-"+str(i)+"-.dat")
-  plot(jps,a,lines[i-1],markevery=1)
+  plot(jps,a,lines[i-1],markevery=1,markersize=12)
 
   
 
-xlabel("$\gamma$",fontsize=28)
+xlabel("$\gamma$",fontsize=19)
 
-xticks((0,pi/4,pi/2),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
+xticks((0,pi/4,pi/2),('$0$','$\pi/4$','$\pi/2$'),fontsize=19)
 
 
-yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
-ylabel("$P$",fontsize=28)
+yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=19)
+ylabel("$P$",fontsize=19)
 
 axis([0,pi/2.,0.5,.85])
 #legend(loc='lower center',fontsize=25)

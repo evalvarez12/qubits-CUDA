@@ -29,6 +29,7 @@ Js,DJs,Dbs,bx_no,bz=[1.,0.,0.,1.,1.]
     
   
 #HACER grafica3
+fig=figure(figsize=(9, 6))
 a=loadtxt("grafica3-gamma_0.5.dat")
 b=loadtxt("grafica3-gamma_0.1.dat")
 c=loadtxt("grafica3-gamma_0.01.dat")
@@ -38,12 +39,12 @@ plot(lamb,log10(1-a),'k-',label='$\gamma=0.5$')
 plot(lamb,log10(1-b),'k--',label='$\gamma=0.1$')
 plot(lamb,log10(1-c),'k:',label='$\gamma=0.01$')
 
-xlabel("$\lambda$",fontsize=28)
+xlabel("$\lambda$",fontsize=17)
 #xticks(log(arange(0.000001,.1+.001,.05)),('$0$','$0.05$','$0.1$'),fontsize=15)
 xscale('log',basex=10)
-xticks((.001,0.01,.1),('$10^{-3}$','$10^{-2}$','$10^{-1}$'),fontsize=25)
-yticks((0,-1,-2),('$0$','$-1$','$-2$'),fontsize=25)
-ylabel("$\log(1-P)$",fontsize=28)
+xticks((.001,0.01,.1),('$10^{-3}$','$10^{-2}$','$10^{-1}$'),fontsize=17)
+yticks((0,-1,-2),('$0$','$-1$','$-2$'),fontsize=17)
+ylabel("$\log(1-P)$",fontsize=17)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -52,8 +53,8 @@ tick_params(axis='both',          # changes apply to the x-axis
     labelbottom='on',
     length=10)
 
-axis([.001,.1,-3,0])
+axis([.001,.1,-2.7,-0.1])
 
-legend(loc='lower right',fontsize=25)
+legend(loc='lower right',fontsize=17)
 
-show()
+savefig('art-g3.png')

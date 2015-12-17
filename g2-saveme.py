@@ -32,7 +32,7 @@ import os
   
 #HACER grafica3
 import nodos as nod
-lines=['bo-','gD-','rp-','cv-','m^-','y>-','H-','d-','x-','s-','+-','D-','v-']
+lines=['bs-','g<-','rp-','cv-','mD-','yH-','D-','h-','>-','H-','d-','x-','s-','+-']
 labels=['$\gamma=50\lambda$','$\gamma=100\lambda$','$\gamma=300\lambda$','$\gamma=500\lambda$','$\gamma=800\lambda$','$\gamma=1000\lambda$','$\gamma=1400\lambda$']
 jps=linspace(0,pi/2,75)
 a=loadtxt("grafica2.dat")
@@ -70,19 +70,19 @@ fig.add_subplot(2,1,2)
 jps=linspace(0,2*pi,151)
 for i in range(1,7) :
   a=loadtxt("grafica2-3-"+str(i)+"-.dat")
-  plot(jps,a,lines[i-1],markevery=1)
+  plot(jps,a,lines[i-1],markevery=1,markersize=10)
 
   
 
-xlabel("$\gamma$",fontsize=28)
+xlabel("$\gamma$",fontsize=17)
 
-xticks((0,pi/2,pi,(3/2.)*pi,2*pi),('$0$','$\pi/2$','$\pi$','$3/2\pi$','$2\pi$'),fontsize=25)
+xticks((0,pi/2,pi,(3/2.)*pi,2*pi),('$0$','$\pi/2$','$\pi$','$3/2\pi$','$2\pi$'),fontsize=17)
 
 
-yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
-ylabel("$P$",fontsize=28)
+yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=17)
+ylabel("$P$",fontsize=17)
 
-axis([0,2*pi,0.5,.85])
+axis([0,pi,0.5,.85])
 #legend(loc='lower center',fontsize=25)
 
 tick_params(axis='both',          # changes apply to the x-axis

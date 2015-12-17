@@ -32,16 +32,16 @@ import os
   
 #HACER grafica3
 from pylab import *
-lines=['o-','<-','p-','v-','*-','^-','h-','D-','>-','H-','d-','x-','s-','+-']
+lines=['bs-','g<-','rp-','cv-','mD-','yH-','D-','h-','>-','H-','d-','x-','s-','+-']
 jps=linspace(0,pi/2,76)
 nu="\mu"
 
 
 
-fig=figure()
+fig=figure(figsize=(14, 9)) # in inches!
 
-ylabel("$P$ \n",fontsize=30)
-xlabel("\n $\gamma$",fontsize=30)
+ylabel("$P$ \n",fontsize=19)
+xlabel("\n $\gamma$",fontsize=19)
 xticks([])
 yticks([])
 
@@ -56,21 +56,21 @@ fig.add_subplot(2,2,1)
 dims=[[6,10],[6,12],[6,15]]
 for i in range(1,4) :
   a=loadtxt("grafica5-4-"+str(i)+".dat")
-  plot(jps,a,lines[i-1],label="$N_{e^\prime}="+str(dims[i-1][1])+"$")
+  plot(jps,a,lines[i-1],label="$N_{e^\prime}="+str(dims[i-1][1])+"$",markersize=12,markevery=2)
 
 
 
-xticks(arange(0,pi/2+.1,pi/4),('','',''),fontsize=25)
+xticks(arange(0,pi/2+.1,pi/4),('','',''),fontsize=19)
 
 
-yticks((0.9,0.8,0.7,0.6,0.52),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
+yticks((0.9,0.8,0.7,0.6,0.52),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=19)
 
 
 axis([0,pi/2,.5,.9])
 
-text(pi/4-.1,0.75,'$N_e=6$',fontsize=28)
+text(pi/4-.1,0.75,'$N_e=6$',fontsize=19)
 
-legend(loc='lower center',fontsize=25)
+legend(loc='lower center',fontsize=19)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -84,21 +84,21 @@ fig.add_subplot(2,2,2)
 dims=[[6,10],[8,10],[10,10]]
 for i in range(1,4) :
   a=loadtxt("grafica5-5-"+str(i)+".dat")
-  plot(jps,a,lines[i-1],label="$N_e="+str(dims[i-1][0])+"$")
+  plot(jps,a,lines[i-1],label="$N_e="+str(dims[i-1][0])+"$",markersize=12,markevery=2)
 
 
 
-xticks(arange(0,pi/2+.1,pi/4),('','',''),fontsize=25)
+xticks(arange(0,pi/2+.1,pi/4),('','',''),fontsize=19)
 
 
-yticks((0.9,0.8,0.7,0.6,0.5),('','','','',''),fontsize=25)
+yticks((0.9,0.8,0.7,0.6,0.5),('','','','',''),fontsize=19)
 
 
 axis([0,pi/2,.5,.9])
 
-legend(loc='lower center',fontsize=25)
+legend(loc='lower center',fontsize=19)
 
-text(pi/4-.1,0.75,"$N_e^{\prime}=10$",fontsize=28)
+text(pi/4-.1,0.75,"$N_e^{\prime}=10$",fontsize=19)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -113,19 +113,19 @@ fig.add_subplot(2,1,2)
 dims=[[6,10],[8,12],[10,14]]
 for i in range(1,4) :
   a=loadtxt("grafica5-6-"+str(i)+".dat")
-  plot(jps,a,lines[i-1],label="$N_e="+str(dims[i-1][0])+"$ $N_{e^\prime}="+str(dims[i-1][1])+"$")
+  plot(jps,a,lines[i-1],label="$N_e="+str(dims[i-1][0])+"$ $N_{e^\prime}="+str(dims[i-1][1])+"$",markersize=12,markevery=2)
 
 
 
-xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=25)
+xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=19)
 
 
-yticks((0.88,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=25)
+yticks((0.88,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=19)
 
 
 axis([0,pi/2,.5,.9])
 
-legend(loc='lower center',fontsize=25)
+legend(loc='lower center',fontsize=19)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -135,4 +135,4 @@ tick_params(axis='both',          # changes apply to the x-axis
     length=10)
 
 fig.subplots_adjust(hspace=0,wspace=0)
-show()
+savefig('different_sizes_3panels.png')
