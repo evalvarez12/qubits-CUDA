@@ -371,6 +371,25 @@ int main(int argc,char* argv[]) {
     cout<<std::real(evmath::purity_last_qubit(state,l))<<endl;
   }
   
+    if(option=="densMat") {
+    for(int it=0;it<numt;it++) {
+      evolution(dev_R,dev_I,js,J,Jp,b,nqubits,xlen,conxA,conxB);
+    }
+    evcuda::cuda2itpp(state,dev_R,dev_I);
+    itpp::cmat rho= itpp::zeros_c(2,2); 
+    itpp::cvec a=state.right(l/2);
+    itpp::cvec b=state.left(l/2); 
+  
+    rho(0,0)=itpp::dot(a,itpp::conj(a));
+    rho(0,1)=itpp::dot(a,itpp::conj(b));
+    rho(1,0)=itpp::dot(b,itpp::conj(a));
+    rho(1,1)=itpp::dot(b,itpp::conj(b));
+    cout<<rho<<endl;
+    
+    rho=rho*rho;
+    cout<<"P = "<<itpp::trace(rho);
+  }
+  
   if(option=="purity_gamma") {
     itpp::cvec zerostate=state;
     int div=75;
