@@ -253,7 +253,11 @@ int main(int argc,char* argv[]) {
       con >> conxA(i) >> conxB(i);
     }
     con.close();
-  }   
+  }
+  if(model=="model3_open_VarMagnetic") {
+    evolution=extra_model::model3_open_VarMagnetic;
+    nqubits_env=nqubits-1;
+  }
 
   
   int Cseed=CseedArg.getValue();int PARAMseed=PARAMseedArg.getValue();int Eseed=EseedArg.getValue();
@@ -384,17 +388,17 @@ int main(int argc,char* argv[]) {
     rho(0,1)=itpp::dot(a,itpp::conj(b));
     rho(1,0)=itpp::dot(b,itpp::conj(a));
     rho(1,1)=itpp::dot(b,itpp::conj(b));
-    cout<<rho<<endl;
+    cout<<rho(0,0)<<" "<<rho(0,1)<<" "<<rho(1,0)<<" "<<rho(1,1)<<endl;
     
     rho=rho*rho;
-    cout<<"P = "<<itpp::trace(rho);
+//     cout<<"P = "<<itpp::trace(rho);
   }
   
   if(option=="purity_gamma") {
     itpp::cvec zerostate=state;
-    int div=75;
+    int div=150;
     for(int gi=0;gi<=div;gi++) {
-      double Jpi=((itpp::pi/2*gi)/div)/sqrt(Jp);
+      double Jpi=((itpp::pi*gi)/(div+1))/sqrt(Jp);
       evcuda::itpp2cuda(zerostate,dev_R,dev_I);
       for(int it=0;it<numt;it++) {
         evolution(dev_R,dev_I,js,J,Jpi,b,nqubits,xlen,conxA,conxB);

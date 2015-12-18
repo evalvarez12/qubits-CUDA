@@ -2,6 +2,7 @@
 # define MODEL
 # include "tools.cpp"
 # include "cuda_functions.cu"
+# include <math.h>
 namespace model{
  
 void model1(double *dev_R, double *dev_I, itpp::vec js, double j, double jp, itpp::mat b , int nqubits, int extra,itpp::ivec conA, itpp::ivec conB){ 
@@ -197,6 +198,8 @@ void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
   */
   int numthreads, numblocks;
   double kcos,ksin,bx,by,bz;
+  itpp::vec bC(3);
+  double kcosC,ksinC,bxC,byC,bzC;
   int l=pow(2,nqubits);
   choosenumblocks(l,numthreads,numblocks);
   //la evolucion de la cadena A de tamaño xlen
@@ -216,6 +219,9 @@ void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
     set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
     Uk_kernel<<<numblocks,numthreads>>>(i,dev_R,dev_I,bx,by,bz,kcos,ksin,l);     
     }
+    bC(0)=(itpp::pi)/(std::sqrt(2)); bC(1)=0.; bC(2)=(itpp::pi)/(std::sqrt(2));
+    set_parameters(bC,kcosC,ksinC,bxC,byC,bzC);
+    Uk_kernel<<<numblocks,numthreads>>>(nqubits-1,dev_R,dev_I,bxC,byC,bzC,kcosC,ksinC,l);
   return;  
   } 
   

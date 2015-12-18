@@ -7,10 +7,10 @@ import os
 
 #GAMAS BUENAS=[0.05,0.1,0.3,0.5,0.8,1.,1.4]
 #i=1
-#os.system("cp conexiones_int3.txt conexiones.txt " )
-#for gamma in [0,0.001,0.01,.1,0.5,1.] :
+#os.system("cp conexionesABC7.txt conexiones.txt " )
+#for gamma in [0.05,0.1,0.3,0.5,0.8,1.] :
   #dat_i=str(i)+".dat"
-  #comando = "./abc -o purity -q 17 --x 6 --model modelConexRandABC --Jc 0.5 --Jp "+str(gamma)+" --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs -2 --t 2500 --Cseed -1 --Eseed 3462 --PARAMseed 9678  > grafica1-12-"
+  #comando = "./abc -o purity -q 17 --x 6 --model modelConexRandABC --Jc 0.01 --Jp "+str(gamma)+" --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0 --t 2500 --Cseed -1 --Eseed 3462 --PARAMseed 9678  > grafica1-3-Cpatead2"
   #os.system(comando + dat_i)
   #print i
   #i+=1
@@ -56,7 +56,7 @@ labels=['$\gamma=5\lambda$','$\gamma=10\lambda$','$\gamma=30\lambda$','$\gamma=5
 
 #labels=['$N_e=6$','$N_e=9$','$N_e=12$','$N_e=15$','$\gamma=0.5$','$\gamma=1.$','$\gamma=140$']
 for i in range(1,7) :
-  a=loadtxt("grafica1-3-"+str(i)+".dat")
+  a=loadtxt("grafica1-3-Cpatead2"+str(i)+".dat")
   plot(a,lines[i],markevery=60,label=labels[i-1],markersize=10)
 
 
@@ -84,4 +84,4 @@ ax = axes([.28, .65, .43, .22])
 #ax = axes([.55, .1, .33, .22])
 nod.nodosABC_lamb_gamma_labels(conx,'-')
 
-savefig('art-g1-3.png')
+savefig('C-pateado2.png')

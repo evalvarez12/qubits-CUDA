@@ -6,26 +6,26 @@ import os
 #OBTENER DATOS
 
 #dat_i=".dat"
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op1 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3-1-"
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op1 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3PATEADO-1-"
 #os.system(comando + dat_i)
 
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op2 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3-2-"
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op2 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3PATEADO-2-"
 #os.system(comando + dat_i)
 
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op3 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3-3-"
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op3 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3PATEADO-3-"
 #os.system(comando + dat_i)
 
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op4 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3-4-"
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op4 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3PATEADO-4-"
 #os.system(comando + dat_i)
 
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op5 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3-5-"
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op5 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3PATEADO-5-"
 #os.system(comando + dat_i)
 
-#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op6 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3-6-"
+#comando = "./abc -o purity_gamma -q 17 --x 6 --model model3_open_op6 --Jc 0.01 --Jp 1. --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0. --t 1000 --Cseed -1 --Eseed 3462 --PARAMseed 0  > grafica2-3PATEADO-6-"
 #os.system(comando + dat_i)
   
   
-# DATOS
+#DATOS
 #grafica2-1- para semicadena rara variando conexiones internas
 #grafica2-3- como 2-2 pero para 2PI
   
@@ -69,7 +69,7 @@ fig.add_subplot(2,1,2)
 
 jps=linspace(0,2*pi,151)
 for i in range(1,7) :
-  a=loadtxt("grafica2-3-"+str(i)+"-.dat")
+  a=loadtxt("grafica2-3PATEADO-"+str(i)+"-.dat")
   plot(jps,a,lines[i-1],markevery=1,markersize=10)
 
   
@@ -82,7 +82,7 @@ xticks((0,pi/2,pi,(3/2.)*pi,2*pi),('$0$','$\pi/2$','$\pi$','$3/2\pi$','$2\pi$'),
 yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=17)
 ylabel("$P$",fontsize=17)
 
-axis([0,pi,0.5,.85])
+axis([0,pi,0.69,.91])
 #legend(loc='lower center',fontsize=25)
 
 tick_params(axis='both',          # changes apply to the x-axis
@@ -93,4 +93,4 @@ tick_params(axis='both',          # changes apply to the x-axis
     length=10)
 
 fig.subplots_adjust(hspace=0,wspace=0)
-savefig('art-g2-2.png')
+savefig('art-g2-2PADEATO.png')
