@@ -939,7 +939,7 @@ void model3_open_VarMagnetic(double *dev_R, double *dev_I, itpp::vec js, double 
   double kcosC,ksinC,bxC,byC,bzC;
   int l=pow(2,nqubits);
   
-  double JP_real = .5;
+  double JP_real = .8;
   
   itpp::vec bC(3);
   choosenumblocks(l,numthreads,numblocks);
@@ -960,7 +960,7 @@ void model3_open_VarMagnetic(double *dev_R, double *dev_I, itpp::vec js, double 
     set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
     Uk_kernel<<<numblocks,numthreads>>>(i,dev_R,dev_I,bx,by,bz,kcos,ksin,l);     
     }
-    bC(0)=jp; bC(1)=0.; bC(2)=jp;
+    bC(0)=0.; bC(1)=0.; bC(2)=jp;
     set_parameters(bC,kcosC,ksinC,bxC,byC,bzC);
     Uk_kernel<<<numblocks,numthreads>>>(nqubits-1,dev_R,dev_I,bxC,byC,bzC,kcosC,ksinC,l);
   return;  

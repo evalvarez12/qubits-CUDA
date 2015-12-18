@@ -388,7 +388,9 @@ int main(int argc,char* argv[]) {
     rho(0,1)=itpp::dot(a,itpp::conj(b));
     rho(1,0)=itpp::dot(b,itpp::conj(a));
     rho(1,1)=itpp::dot(b,itpp::conj(b));
-    cout<<rho(0,0)<<" "<<rho(0,1)<<" "<<rho(1,0)<<" "<<rho(1,1)<<endl;
+//     cout<<rho(0,0)<<" "<<rho(0,1)<<" "<<rho(1,0)<<" "<<rho(1,1)<<endl;
+    cout<<" "<<rho(0,1)<<" NORM = "<<std::norm(rho(0,1))<<" ARG = "<<std::arg(rho(0,1))<<endl;
+    cout<<" "<<rho(1,0)<<" NORM = "<<std::norm(rho(1,0))<<" ARG = "<<std::arg(rho(1,0))<<endl;
     
     rho=rho*rho;
 //     cout<<"P = "<<itpp::trace(rho);
@@ -396,7 +398,8 @@ int main(int argc,char* argv[]) {
   
   if(option=="purity_gamma") {
     itpp::cvec zerostate=state;
-    int div=150;
+    int div=299;
+    //div real = div +1
     for(int gi=0;gi<=div;gi++) {
       double Jpi=((itpp::pi*gi)/(div+1))/sqrt(Jp);
       evcuda::itpp2cuda(zerostate,dev_R,dev_I);

@@ -56,13 +56,19 @@ for i in range(1,4) :
 
 
 
-xticks(arange(0,pi/2+.1,pi/4),('$0$','$\pi/4$','$\pi/2$'),fontsize=19)
+xticks((0,pi/4,pi/2),('$0$','$\pi/4$','$\pi/2$'),fontsize=19)
 
 
 yticks((0.88,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=19)
 
 
-axis([0,pi/2,.5,.9])
+text(0+.006,0.84,"$0$",fontsize=19)
+text(pi/4-0.06,0.84,"$\pi/2$",fontsize=19)
+text(pi/4+0.006,0.84,"$0$",fontsize=19)
+text(pi/2-0.06,0.84,"$\pi/2$",fontsize=19)
+
+
+axis([0,pi/2,.5,.87])
 
 legend(loc='lower center',fontsize=19)
 
@@ -95,15 +101,15 @@ for i in range(1,4) :
 
 
 
-xticks((.02,pi/4,pi/2-.02),('','$\pi/4$',''),fontsize=19)
+xticks((.0,pi/4,pi/2),('','$\pi/4$',''),fontsize=19)
 
 
 yticks((0.9,0.8,0.7,0.6,0.52),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=19)
 
 
-axis([0,pi/2,.5,.9])
+axis([0,pi/2,.5,.87])
 
-text(pi/4-.1,0.75,'$N_e=6$',fontsize=19)
+text(pi/4-.1,0.67,'$N_e=6$',fontsize=19)
 
 legend(loc='lower center',fontsize=19)
 
@@ -123,17 +129,17 @@ for i in range(1,4) :
 
 
 
-xticks((.02,pi/4,pi/2-.02),('','$\pi/4$',''),fontsize=19)
+xticks((.0,pi/4,pi/2),('','$\pi/4$',''),fontsize=19)
 
 
 yticks((0.9,0.8,0.7,0.6,0.5),('','','','',''),fontsize=19)
 
 
-axis([0,pi/2,.5,.9])
+axis([0,pi/2,.5,.87])
 
 legend(loc='lower center',fontsize=19)
 
-text(pi/4-.1,0.75,"$N_e^{\prime}=10$",fontsize=19)
+text(pi/4-.1,0.67,"$N_{e^{\prime}}=10$",fontsize=19)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
