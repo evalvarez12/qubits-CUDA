@@ -7,10 +7,10 @@ import os
 
 #GAMAS BUENAS=[0.05,0.1,0.3,0.5,0.8,1.,1.4]
 #i=1
-#os.system("cp conexionesABC7.txt conexiones.txt " )
+##os.system("cp conexionesABC7.txt conexiones.txt " )
 #for gamma in [0.05,0.1,0.3,0.5,0.8,1.] :
   #dat_i=str(i)+".dat"
-  #comando = "./abc -o purity -q 17 --x 6 --model modelConexRandABC --Jc 0.01 --Jp "+str(gamma)+" --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0 --t 2500 --Cseed -1 --Eseed 3462 --PARAMseed 9678  > grafica1-3-Cpatead2"
+  #comando = "./abc -o purity -q 17 --x 6 --model model3_open --Jc 0.01 --Jp "+str(gamma)+" --Js 1. --DJs 0. --bx 1. --bz 1. --Dbs 0 --t 2500 --Cseed -1 --Eseed 3462 --PARAMseed 9678  > grafica1-3-MU"
   #os.system(comando + dat_i)
   #print i
   #i+=1
@@ -38,7 +38,7 @@ import os
 
   
   
-#HACER grafica
+##HACER grafica
 import nodos as nod
 
 
@@ -56,7 +56,7 @@ labels=['$\gamma=5\lambda$','$\gamma=10\lambda$','$\gamma=30\lambda$','$\gamma=5
 
 #labels=['$N_e=6$','$N_e=9$','$N_e=12$','$N_e=15$','$\gamma=0.5$','$\gamma=1.$','$\gamma=140$']
 for i in range(1,7) :
-  a=loadtxt("grafica1-3-"+str(i)+".dat")
+  a=loadtxt("grafica1-3-Cpatead"+str(i)+".dat")
   plot(a,lines[i-1],markevery=60,label=labels[i-1],markersize=10)
 
 
@@ -68,9 +68,9 @@ ylabel("$P$",fontsize=17)
 #text(2000,0.7,'$b \perp J$',fontsize=28)
 #text(1000,0.7,'$\lambda=0.2$',fontsize=28)
 
-axis([0,2500.,0.48,1])
+axis([0,2500.,0.58,1])
 
-legend(loc='upper right',fontsize=17)
+legend(loc='lower left',fontsize=17)
 
 tick_params(axis='both',          # changes apply to the x-axis
     which='both',      # both major and minor ticks are affected
@@ -80,8 +80,8 @@ tick_params(axis='both',          # changes apply to the x-axis
     length=10)
 
 #INSET
-ax = axes([.28, .65, .43, .22])
-#ax = axes([.55, .1, .33, .22])
-nod.nodosABC_lamb_gamma_labels(conx,'-')
+#ax = axes([.28, .65, .43, .22])
+##ax = axes([.55, .1, .33, .22])
+#nod.nodosABC_lamb_gamma_labels(conx,'-')
 
-savefig('art-g1-3.png')
+savefig('Cpateado.png')

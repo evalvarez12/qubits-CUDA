@@ -198,8 +198,8 @@ void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
   */
   int numthreads, numblocks;
   double kcos,ksin,bx,by,bz;
-  itpp::vec bC(3);
-  double kcosC,ksinC,bxC,byC,bzC;
+//   itpp::vec bC(3);
+//   double kcosC,ksinC,bxC,byC,bzC;
   int l=pow(2,nqubits);
   choosenumblocks(l,numthreads,numblocks);
   //la evolucion de la cadena A de tamaño xlen
@@ -211,17 +211,21 @@ void model3_open(double *dev_R, double *dev_I, itpp::vec js, double j, double jp
     Ui_kernel<<<numblocks,numthreads>>>(i+xlen,i+1+xlen,dev_R,dev_I,cos(js(i+xlen)),sin(js(i+xlen)),l);
     }
   //la interaccion A B  
-  Ui_kernel<<<numblocks,numthreads>>>(4,10,dev_R,dev_I,cos(jp),sin(jp),l);
+  Ui_kernel<<<numblocks,numthreads>>>(2,10,dev_R,dev_I,cos(jp),sin(jp),l);
   //se hace la interacion 0 con A
   Ui_kernel<<<numblocks,numthreads>>>(nqubits-1,2,dev_R,dev_I,cos(j),sin(j),l);
+  
+  // INTERACCION MU
+  Ui_kernel<<<numblocks,numthreads>>>(nqubits-1,15,dev_R,dev_I,cos(.01),sin(.01),l);
+  
   //evolucion patada magnetica
   for(int i=0;i<nqubits-1;i++) {
     set_parameters(b.get_row(i),kcos,ksin,bx,by,bz);
     Uk_kernel<<<numblocks,numthreads>>>(i,dev_R,dev_I,bx,by,bz,kcos,ksin,l);     
     }
-    bC(0)=(itpp::pi)/(2*std::sqrt(2)); bC(1)=0.; bC(2)=(itpp::pi)/(2*std::sqrt(2));
-    set_parameters(bC,kcosC,ksinC,bxC,byC,bzC);
-    Uk_kernel<<<numblocks,numthreads>>>(nqubits-1,dev_R,dev_I,bxC,byC,bzC,kcosC,ksinC,l);
+//     bC(0)=(itpp::pi)/(2*std::sqrt(2)); bC(1)=0.; bC(2)=(itpp::pi)/(2*std::sqrt(2));
+//     set_parameters(bC,kcosC,ksinC,bxC,byC,bzC);
+//     Uk_kernel<<<numblocks,numthreads>>>(nqubits-1,dev_R,dev_I,bxC,byC,bzC,kcosC,ksinC,l);
   return;  
   } 
   

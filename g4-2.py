@@ -19,12 +19,13 @@ import conexiones as conx
 #HACER grafica3
 fig=figure(figsize=(9, 6)) # in inches!
 
-lines=['o-','<-','p-','v-','+-','^-','h-','D-','>-','H-','d-','s-','x-','*-']
+lines=['bs-','g<-','rp-','cv-','mD-','yH-','D-','h-','>-','H-','d-','x-','s-','+-']
 
-
+cont = 0
 for i in [4,8,12,14] :
   a=loadtxt("grafica4-2-pt-"+str(i)+".dat")
-  plot(a,lines[i-1],markevery=60,label=r"$\nu="+str(i)+"$",markersize=10)
+  plot(a,lines[cont],markevery=60,label=r"$\nu="+str(i)+"$",markersize=10)
+  cont += 1
   
   
   
@@ -52,14 +53,15 @@ tick_params(axis='both',          # changes apply to the x-axis
 #INSET
 ax = axes([.55, .65, .33, .22])
 jps=linspace(0,pi/2,75)
-
+cont = 0
 for i in [4,8,12,14] :
   ains=loadtxt("grafica4-"+str(i)+".dat")
   jps2=jps/sqrt(i)
-  plot(jps2,ains,lines[i-1])
+  plot(jps2,ains,lines[cont],markersize=10)
   xticks((0,pi/16,pi/8),('$0$','$\pi/16$','$\pi/8$'),fontsize=17)
   yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=17)
   setp(ax, xlim=(0,pi/8))
+  cont += 1
   
 
 xlabel("$\gamma^{\prime}$",fontsize=17)

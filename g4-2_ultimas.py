@@ -33,7 +33,7 @@ lines=['bs-','g<-','rp-','cv-','mD-','yH-','D-','h-','>-','H-','d-','x-','s-','+
 cont = 1
 for i in [4,8,12,14] :
   a=loadtxt("grafica4-muerte"+str(cont)+".dat")
-  plot(a,lines[cont-1],markevery=60,label=r"$\nu="+str(i)+"$")
+  plot(a,lines[cont-1],markevery=60,label=r"$\nu="+str(i)+"$",markersize=10)
   cont += 1
   
   
@@ -67,7 +67,7 @@ cont=1
 for i in [4,8,12,14] :
   ains=loadtxt("grafica4-muerte-inset"+str(cont)+".dat")
   jps2=jps/sqrt(i)
-  plot(jps2,ains,lines[cont-1])
+  plot(jps2,ains,lines[cont-1],markersize=10,markevery=2)
   xticks((0,pi/16,pi/8),('$0$','$\pi/16$','$\pi/8$'),fontsize=17)
   yticks((0.9,0.8,0.7,0.6,0.5),('$0.9$','$0.8$','$0.7$','$0.6$','$0.5$'),fontsize=17)
   setp(ax, xlim=(0,pi/8))
